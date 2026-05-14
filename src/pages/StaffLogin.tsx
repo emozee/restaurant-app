@@ -95,7 +95,7 @@ export default function StaffLogin() {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-6 relative overflow-hidden">
         <div className="absolute inset-0 bg-kira-pattern opacity-30" />
-        <form onSubmit={handleUpdatePassword} className="max-w-md w-full glass-card p-8 sm:p-10 rounded-[2rem] shadow-2xl text-center">
+        <form onSubmit={handleUpdatePassword} className="max-w-md w-full glass-card p-8 sm:p-10 rounded-[2rem] shadow-2xl text-center relative z-10">
           <div className="bg-orange-50 w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-inner">
             <KeyRound className="text-[#D64000]" size={32} />
           </div>
@@ -195,7 +195,7 @@ export default function StaffLogin() {
         <ArrowLeft size={14} /> BACK TO CUSTOMER VIEW
       </button>
 
-      <form onSubmit={handleEmailLogin} className="max-w-md w-full glass-card p-8 sm:p-10 rounded-[2rem] shadow-2xl text-center">
+      <form onSubmit={handleEmailLogin} className="max-w-md w-full glass-card p-8 sm:p-10 rounded-[2rem] shadow-2xl text-center relative z-10">
         <div className="bg-orange-50 w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-inner">
            <LogIn className="text-[#D64000]" size={32} />
         </div>
@@ -249,7 +249,7 @@ export default function StaffLogin() {
         <button
           type="submit"
           disabled={loading}
-          className="mt-6 w-full flex items-center justify-center gap-4 bg-gray-900 text-white p-5 rounded-2xl font-black text-sm hover:bg-black transition btn-press disabled:opacity-50 shadow-xl"
+          className="mt-6 w-full flex items-center justify-center gap-4 bg-gray-900 text-white p-5 rounded-2xl font-black text-sm hover:bg-black hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-50 disabled:hover:scale-100 shadow-xl"
         >
           {loading ? (
             <Loader2 className="animate-spin" size={20} />
