@@ -550,12 +550,12 @@ export default function CustomerMenu() {
                   return (
                     <div
                       key={item.id}
-                      className="flex items-center gap-4 glass-card rounded-[2rem] hover-lift hover:shadow-md transition-shadow"
+                      className="flex items-center gap-4 glass-card rounded-[2rem] hover-lift hover:shadow-md transition-shadow group-img-pop"
                     >
-                      <div className="w-20 h-20 rounded-2xl bg-gray-50 overflow-hidden shrink-0">
+                      <div className="w-20 h-20 rounded-2xl bg-gray-50 overflow-hidden shrink-0 img-pop-wrap">
                         <img
                           src={item.image_url || "https://via.placeholder.com/150"}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover img-pop"
                           alt={item.name}
                         />
                       </div>

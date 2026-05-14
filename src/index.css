@@ -148,7 +148,18 @@ body {
   animation: float 3s ease-in-out infinite;
 }
 
-/* Shimmer for brand text */
+/* Pop-out effect for images */
+.group-img-pop .img-pop {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+}
+.group-img-pop:hover .img-pop {
+  transform: scale(1.25) rotate(-2deg);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+}
+.group-img-pop:hover .img-pop-wrap {
+  overflow: visible;
+  z-index: 10;
+}
 @keyframes shimmer {
   0% { background-position: -200% center; }
   100% { background-position: 200% center; }
