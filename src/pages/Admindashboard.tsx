@@ -336,7 +336,7 @@ export default function AdminDashboard() {
                         type="button"
                         onClick={() => updateGroupStatus(group, "confirmed")}
                         disabled={updatingGroup === group.key}
-                        className="px-4 py-3 rounded-2xl bg-blue-50 text-blue-700 font-black text-xs uppercase disabled:opacity-50"
+                        className="px-4 py-3 rounded-2xl bg-blue-50 text-blue-700 font-black text-xs uppercase disabled:opacity-50 hover:bg-blue-100 hover:scale-105 hover:shadow-lg transition-all active:scale-95"
                       >
                         Confirm
                       </button>
@@ -344,7 +344,7 @@ export default function AdminDashboard() {
                         type="button"
                         onClick={() => updateGroupStatus(group, "cooking")}
                         disabled={updatingGroup === group.key}
-                        className="px-4 py-3 rounded-2xl bg-orange-50 text-orange-700 font-black text-xs uppercase disabled:opacity-50 flex items-center justify-center gap-2"
+                        className="px-4 py-3 rounded-2xl bg-orange-50 text-orange-700 font-black text-xs uppercase disabled:opacity-50 flex items-center justify-center gap-2 hover:bg-orange-100 hover:scale-105 hover:shadow-lg transition-all active:scale-95"
                       >
                         <ChefHat size={15} /> Cooking
                       </button>
@@ -352,7 +352,7 @@ export default function AdminDashboard() {
                         type="button"
                         onClick={() => updateGroupStatus(group, "completed")}
                         disabled={updatingGroup === group.key}
-                        className="px-4 py-3 rounded-2xl bg-green-600 text-white font-black text-xs uppercase disabled:opacity-50"
+                        className="px-4 py-3 rounded-2xl bg-green-600 text-white font-black text-xs uppercase disabled:opacity-50 hover:bg-green-500 hover:scale-105 hover:shadow-lg transition-all active:scale-95"
                       >
                         Complete
                       </button>

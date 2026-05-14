@@ -376,7 +376,9 @@ export default function CustomerMenu() {
       {activeOrder && activeOrder.status !== "completed" && (
         <div
           className={`px-6 py-3 sticky top-0 z-[60] shadow-lg text-white backdrop-blur-xl ${
-            activeOrder.status === "cooking" ? "bg-orange-600/80" : "bg-[#D64000]/80"
+            activeOrder.status === "cooking" ? "bg-orange-600/80" :
+            activeOrder.status === "confirmed" ? "bg-blue-600/80" :
+            "bg-yellow-600/80"
           }`}
         >
           <div className="max-w-6xl mx-auto flex items-center gap-3">
