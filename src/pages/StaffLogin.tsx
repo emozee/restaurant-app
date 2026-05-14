@@ -1,5 +1,5 @@
 import { supabase } from '../lib/supabase';
-import { LogIn, Loader2, ArrowLeft, Mail, LockKeyhole, KeyRound, ArrowRight, CheckCircle2, Eye, EyeOff } from 'lucide-react';
+import { Loader2, ArrowLeft, Mail, LockKeyhole, ArrowRight, CheckCircle2, Eye, EyeOff } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { hasAdminAccess } from '../lib/admin';
@@ -95,11 +95,12 @@ export default function StaffLogin() {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-6 relative overflow-hidden">
         <div className="absolute inset-0 bg-kira-pattern opacity-30" />
+        <div className="absolute inset-0 bg-[url('/logo.jpg')] bg-cover bg-center opacity-[0.04]" />
         <div className="absolute top-20 left-10 w-24 h-24 rounded-full bg-[#D64000]/5 blur-3xl animate-float" />
         <div className="absolute bottom-20 right-10 w-32 h-32 rounded-full bg-[#FFB800]/5 blur-3xl animate-float" style={{ animationDelay: '1.5s' }} />
         <form onSubmit={handleUpdatePassword} className="max-w-md w-full glass-card p-8 sm:p-10 rounded-[2rem] shadow-2xl text-center relative z-10">
-          <div className="bg-orange-50 w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-inner">
-            <KeyRound className="text-[#D64000]" size={32} />
+          <div className="w-24 h-24 rounded-3xl flex items-center justify-center mx-auto mb-6 overflow-hidden shadow-lg">
+            <img src="/logo.jpg" alt="ཨོ་ལོ Pizza" className="w-full h-full object-cover" />
           </div>
           <h1 className="text-3xl font-black mb-2 italic tracking-tighter">Set New Password</h1>
           <p className="text-gray-400 mb-8 font-bold text-xs uppercase tracking-widest">Enter your new password below</p>
@@ -139,14 +140,15 @@ export default function StaffLogin() {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-6 relative overflow-hidden">
         <div className="absolute inset-0 bg-kira-pattern opacity-30" />
+        <div className="absolute inset-0 bg-[url('/logo.jpg')] bg-cover bg-center opacity-[0.04]" />
         <button onClick={() => { setShowReset(false); setResetSent(false); setErrorMessage(''); }}
           className="mb-8 flex items-center gap-2 text-gray-400 font-bold text-xs hover:text-gray-900 transition-colors"
         >
           <ArrowLeft size={14} /> BACK TO SIGN IN
         </button>
         <div className="max-w-md w-full glass-card p-8 sm:p-10 rounded-[2rem] shadow-2xl text-center">
-          <div className="bg-orange-50 w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-inner">
-            <KeyRound className="text-[#D64000]" size={32} />
+          <div className="w-24 h-24 rounded-3xl flex items-center justify-center mx-auto mb-6 overflow-hidden shadow-lg">
+            <img src="/logo.jpg" alt="ཨོ་ལོ Pizza" className="w-full h-full object-cover" />
           </div>
           <h1 className="text-3xl font-black mb-2 italic tracking-tighter">Reset Password</h1>
           <p className="text-gray-400 mb-8 font-bold text-xs uppercase tracking-widest">We'll send you a reset link</p>
@@ -190,6 +192,7 @@ export default function StaffLogin() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-6 relative overflow-hidden">
       <div className="absolute inset-0 bg-kira-pattern opacity-30" />
+      <div className="absolute inset-0 bg-[url('/logo.jpg')] bg-cover bg-center opacity-[0.04]" />
       <div className="absolute top-20 left-10 w-24 h-24 rounded-full bg-[#D64000]/5 blur-3xl animate-float" />
       <div className="absolute bottom-20 right-10 w-32 h-32 rounded-full bg-[#FFB800]/5 blur-3xl animate-float" style={{ animationDelay: '1.5s' }} />
       <div className="absolute top-40 right-20 w-16 h-16 rounded-full bg-[#D64000]/5 blur-2xl animate-float" style={{ animationDelay: '0.8s' }} />
@@ -201,8 +204,8 @@ export default function StaffLogin() {
       </button>
 
       <form onSubmit={handleEmailLogin} className="max-w-md w-full glass-card p-8 sm:p-10 rounded-[2rem] shadow-2xl text-center relative z-10">
-        <div className="bg-orange-50 w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-inner">
-           <LogIn className="text-[#D64000]" size={32} />
+        <div className="w-24 h-24 rounded-3xl flex items-center justify-center mx-auto mb-6 overflow-hidden shadow-lg">
+          <img src="/logo.jpg" alt="ཨོ་ལོ Pizza" className="w-full h-full object-cover" />
         </div>
         
         <h1 className="font-black italic tracking-tighter leading-none group/title cursor-default">

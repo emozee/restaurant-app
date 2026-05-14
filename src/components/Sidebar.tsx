@@ -35,7 +35,10 @@ const Sidebar = () => {
 
   return (
     <aside className="w-72 glass-light h-screen fixed left-0 top-0 border-r border-white/20 flex flex-col z-50">
-        <div className="p-8">
+        <div className="p-8 flex items-center gap-4">
+          <div className="w-12 h-12 rounded-xl overflow-hidden shadow-md shrink-0">
+            <img src="/logo.jpg" alt="ཨོ་ལོ" className="w-full h-full object-cover" />
+          </div>
           <div className="group/brand cursor-default">
             <div className="font-black italic tracking-tighter uppercase leading-none transition-all duration-300 group-hover/brand:scale-105">
               <div className="text-[#D64000] text-3xl transition-all duration-300 group-hover/brand:drop-shadow-[0_0_10px_rgba(214,64,0,0.4)]">ཨོ་ལོ</div>

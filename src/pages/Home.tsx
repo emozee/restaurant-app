@@ -53,8 +53,12 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white flex flex-col items-center justify-center p-6 relative">
       <div className="absolute inset-0 bg-kira-pattern opacity-[0.015] pointer-events-none" />
+      <div className="absolute inset-0 bg-[url('/logo.jpg')] bg-cover bg-center opacity-[0.025] pointer-events-none" />
       <div className="w-full max-w-sm space-y-8 text-center">
-        <header className="mb-10">
+        <header className="mb-10 flex flex-col items-center">
+          <div className="w-20 h-20 rounded-2xl overflow-hidden shadow-lg mb-4 ring-2 ring-[#D64000]/10">
+            <img src="/logo.jpg" alt="ཨོ་ལོ Pizza" className="w-full h-full object-cover" />
+          </div>
           <h1 className="flex flex-col items-center leading-none group/title cursor-default">
             <span className="text-5xl font-black italic tracking-tighter transition-all duration-300 group-hover/title:scale-110 group-hover/title:drop-shadow-[0_0_15px_rgba(214,64,0,0.4)]" style={{ color: '#D64000' }}>ཨོ་ལོ</span>
             <span className="text-5xl font-black italic tracking-tighter -mt-2 transition-all duration-300 group-hover/title:scale-110 group-hover/title:drop-shadow-[0_0_15px_rgba(255,184,0,0.4)]" style={{ color: '#FFB800' }}>PIZZA</span>
