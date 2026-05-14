@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 import {
   LayoutGrid, BarChart3, Utensils, QrCode, LogOut, Loader2, Clock,
 } from "lucide-react";
 
 const Sidebar = () => {
-  const navigate = useNavigate();
   const [session, setSession] = useState<any>(null);
   const [loading, setLoading] = useState(false);
 
@@ -19,8 +18,7 @@ const Sidebar = () => {
   const handleLogout = async () => {
     setLoading(true);
     await supabase.auth.signOut();
-    setLoading(false);
-    navigate("/", { replace: true });
+    window.location.href = "/";
   };
 
   if (!session) return null;

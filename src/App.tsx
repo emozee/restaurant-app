@@ -60,7 +60,7 @@ function App() {
   const showSidebar = session && isAdmin && isAdminPath;
 
   const requireAdmin = (page: ReactElement) => {
-    return session && isAdmin ? page : <Navigate to="/admin-login" replace />;
+    return session && isAdmin ? page : <Navigate to="/" replace />;
   };
 
   return (
