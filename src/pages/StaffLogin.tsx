@@ -200,7 +200,11 @@ export default function StaffLogin() {
            <LogIn className="text-[#D64000]" size={32} />
         </div>
         
-        <h1 className="text-3xl font-black mb-2 italic tracking-tighter"><span className="text-[#D64000]">OLO</span> <span className="text-[#FFB800]">PIZZA</span> PORTAL</h1>
+        <h1 className="text-3xl font-black mb-2 italic tracking-tighter group/title cursor-default">
+          <span className="text-[#D64000] inline-block transition-all duration-300 group-hover/title:scale-110 group-hover/title:drop-shadow-[0_0_12px_rgba(214,64,0,0.5)]">OLO</span>{' '}
+          <span className="text-[#FFB800] inline-block transition-all duration-300 group-hover/title:scale-110 group-hover/title:drop-shadow-[0_0_12px_rgba(255,184,0,0.5)] group-hover/title:-rotate-2">PIZZA</span>
+          <span className="text-gray-300 inline-block transition-all duration-300 group-hover/title:scale-105 ml-1">PORTAL</span>
+        </h1>
         <p className="text-gray-400 mb-10 font-bold text-xs uppercase tracking-widest">Administrative Access Only</p>
 
         <div className="space-y-4 text-left">

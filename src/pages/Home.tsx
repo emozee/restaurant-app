@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ShoppingBag, UtensilsCrossed, UserCircle, ArrowLeft } from 'lucide-react';
+import { validatePhone, formatPhoneDisplay } from '../lib/phone';
 
 type Step = 'landing' | 'choose' | 'form';
 
@@ -9,18 +10,41 @@ export default function Home() {
   const [step, setStep] = useState<Step>('landing');
   const [orderType, setOrderType] = useState<'takeaway' | 'dine-in' | null>(null);
   const [customerInfo, setCustomerInfo] = useState({ name: '', phone: '' });
+  const [phoneError, setPhoneError] = useState('');
+  const [phoneCarrier, setPhoneCarrier] = useState('');
 
   const handleChoose = (type: 'takeaway' | 'dine-in') => {
     setOrderType(type);
     setStep('form');
   };
 
+  const handlePhoneChange = (value: string) => {
+    const digits = value.replace(/\D/g, '');
+    const clean = digits.startsWith('975') ? digits.slice(3) : digits;
+    const limited = clean.slice(0, 8);
+    setCustomerInfo({ ...customerInfo, phone: limited });
+    if (limited.length === 8) {
+      const result = validatePhone(limited);
+      setPhoneError(result.valid ? '' : (result.error || ''));
+      setPhoneCarrier(result.carrier || '');
+    } else {
+      setPhoneError('');
+      setPhoneCarrier('');
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!customerInfo.name.trim() || !customerInfo.phone.trim()) return;
+    if (!customerInfo.name.trim()) return;
+    const result = validatePhone(customerInfo.phone);
+    if (!result.valid) {
+      setPhoneError(result.error || 'Enter a valid Bhutanese phone number');
+      return;
+    }
+    const fullPhone = formatPhoneDisplay(customerInfo.phone);
     localStorage.setItem('customer_info', JSON.stringify({
       name: customerInfo.name.trim(),
-      phone: customerInfo.phone.trim(),
+      phone: fullPhone,
       type: orderType,
     }));
     navigate('/menu');
@@ -115,14 +139,25 @@ export default function Home() {
               </div>
               <div>
                 <label className="text-[10px] font-black uppercase text-gray-400 ml-2 block mb-1">Contact Number *</label>
-                <input
-                  required
-                  type="tel"
-                  value={customerInfo.phone}
-                  className="w-full p-4 rounded-2xl bg-white border-none shadow-sm font-bold text-sm text-gray-900 outline-none focus:ring-2 focus:ring-orange-100"
-                  placeholder="e.g. 17XXXXXX"
-                  onChange={(e) => setCustomerInfo({ ...customerInfo, phone: e.target.value })}
-                />
+                <div className="relative">
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 font-bold text-sm pointer-events-none">+975</span>
+                  <input
+                    required
+                    type="tel"
+                    value={customerInfo.phone}
+                    className="w-full p-4 pl-16 rounded-2xl bg-white border-none shadow-sm font-bold text-sm text-gray-900 outline-none focus:ring-2 focus:ring-orange-100"
+                    placeholder="77XXXXXX"
+                    onChange={(e) => handlePhoneChange(e.target.value)}
+                  />
+                </div>
+                {phoneCarrier && (
+                  <p className="text-[10px] font-bold mt-1 ml-2 text-gray-500">
+                    {phoneCarrier === 'TashiCell' ? '📶' : '📶'} {phoneCarrier}
+                  </p>
+                )}
+                {phoneError && (
+                  <p className="text-[10px] font-bold mt-1 ml-2 text-red-500">{phoneError}</p>
+                )}
               </div>
               <button
                 type="submit"

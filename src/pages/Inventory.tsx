@@ -17,7 +17,9 @@ import {
   User,
   UtensilsCrossed,
   X,
+  PhoneCall,
 } from "lucide-react";
+import { validatePhone, formatPhoneDisplay, getPhoneDigits } from "../lib/phone";
 
 type OrderMode = "dine-in" | "takeaway";
 
@@ -63,7 +65,7 @@ export default function CustomerMenu() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [activeCategory, setActiveCategory] = useState("All");
   const [activeOrder, setActiveOrder] = useState<any>(null);
-  const [orderSuccess, setOrderSuccess] = useState(false);
+  const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [customerInfo, setCustomerInfo] = useState<CustomerInfo | null>(() =>
     readStoredCustomer(customerStorageKey),
   );
@@ -73,6 +75,8 @@ export default function CustomerMenu() {
     type: isTableOrder ? "dine-in" : customerInfo?.type || "takeaway",
     tableNumber,
   }));
+  const [phoneError, setPhoneError] = useState('');
+  const [phoneCarrier, setPhoneCarrier] = useState('');
 
   const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const activeOrderStorageKey = customerInfo
@@ -185,14 +189,20 @@ export default function CustomerMenu() {
 
   const saveCustomerDetails = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const result = validatePhone(customerForm.phone);
+    if (!result.valid) {
+      setPhoneError(result.error || 'Enter a valid Bhutanese phone number');
+      return;
+    }
+    const fullPhone = formatPhoneDisplay(customerForm.phone);
     const nextInfo: CustomerInfo = {
       name: customerForm.name.trim(),
-      phone: customerForm.phone.trim(),
+      phone: fullPhone,
       type: isTableOrder ? "dine-in" : customerForm.type,
       tableNumber,
     };
 
-    if (!nextInfo.name || !nextInfo.phone) return;
+    if (!nextInfo.name) return;
 
     localStorage.setItem(customerStorageKey, JSON.stringify(nextInfo));
     setCustomerInfo(nextInfo);
@@ -254,8 +264,7 @@ export default function CustomerMenu() {
 
       setBasket({});
       setIsBasketOpen(false);
-      setOrderSuccess(true);
-      window.setTimeout(() => setOrderSuccess(false), 3000);
+      setShowConfirmDialog(true);
     } catch (error) {
       const message = error instanceof Error ? error.message : "Unknown error";
       alert(`Failed to place order: ${message}`);
@@ -340,15 +349,35 @@ export default function CustomerMenu() {
               <span className="text-[10px] font-black uppercase text-gray-400 ml-2 block mb-1">Phone Number</span>
               <div className="relative">
                 <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300" size={18} />
+                <span className="absolute left-12 top-1/2 -translate-y-1/2 text-gray-400 font-bold text-sm pointer-events-none">+975</span>
                 <input
                   required
                   type="tel"
                   value={customerForm.phone}
-                  onChange={(e) => setCustomerForm((form) => ({ ...form, phone: e.target.value }))}
-                  className="w-full bg-white/80 backdrop-blur-sm text-gray-900 pl-12 pr-4 py-4 rounded-2xl font-bold text-sm outline-none focus:ring-2 focus:ring-orange-100"
-                  placeholder="Enter phone number"
+                  onChange={(e) => {
+                    const digits = e.target.value.replace(/\D/g, '');
+                    const clean = digits.startsWith('975') ? digits.slice(3) : digits;
+                    const limited = clean.slice(0, 8);
+                    setCustomerForm((form) => ({ ...form, phone: limited }));
+                    if (limited.length === 8) {
+                      const r = validatePhone(limited);
+                      setPhoneError(r.valid ? '' : (r.error || ''));
+                      setPhoneCarrier(r.carrier || '');
+                    } else {
+                      setPhoneError('');
+                      setPhoneCarrier('');
+                    }
+                  }}
+                  className="w-full bg-white/80 backdrop-blur-sm text-gray-900 pl-[4.5rem] pr-4 py-4 rounded-2xl font-bold text-sm outline-none focus:ring-2 focus:ring-orange-100"
+                  placeholder="77XXXXXX"
                 />
               </div>
+              {phoneCarrier && (
+                <p className="text-[10px] font-bold mt-1 ml-2 text-gray-500">📶 {phoneCarrier}</p>
+              )}
+              {phoneError && (
+                <p className="text-[10px] font-bold mt-1 ml-2 text-red-500">{phoneError}</p>
+              )}
             </label>
           </div>
 
@@ -367,9 +396,31 @@ export default function CustomerMenu() {
 
   return (
     <div className="min-h-screen bg-white font-sans text-gray-900">
-      {orderSuccess && (
-        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-[200] bg-green-600/80 backdrop-blur-xl text-white px-6 py-3 rounded-2xl font-black shadow-lg flex items-center gap-2 border border-white/10">
-          <CheckCircle2 size={18} /> Order placed successfully
+      {showConfirmDialog && (
+        <div className="fixed inset-0 z-[300] flex items-center justify-center bg-black/50 backdrop-blur-sm">
+          <div className="glass-card max-w-sm w-full mx-4 p-8 rounded-[2.5rem] text-center animate-slide-up">
+            <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-5">
+              <CheckCircle2 size={32} className="text-green-600" />
+            </div>
+            <h2 className="text-xl font-black text-gray-900 mb-2">Order Placed!</h2>
+            <p className="text-sm font-bold text-gray-500 mb-6">
+              Call <span className="text-[#D64000]">+975 17XXXXXX</span> for further confirmation — we may be busy in the kitchen.
+            </p>
+            <div className="flex gap-3">
+              <a
+                href={`tel:+975${getPhoneDigits(customerForm.phone || customerInfo?.phone || '')}`}
+                className="flex-1 flex items-center justify-center gap-2 bg-[#D64000] text-white p-4 rounded-2xl font-black text-sm hover:scale-[1.02] active:scale-95 transition-all"
+              >
+                <PhoneCall size={18} /> Call Now
+              </a>
+              <button
+                onClick={() => setShowConfirmDialog(false)}
+                className="flex-1 bg-gray-100 text-gray-600 p-4 rounded-2xl font-black text-sm hover:bg-gray-200 transition"
+              >
+                Close
+              </button>
+            </div>
+          </div>
         </div>
       )}
 
