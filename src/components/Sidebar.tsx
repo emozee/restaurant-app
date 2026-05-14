@@ -35,10 +35,16 @@ const Sidebar = () => {
 
   return (
     <aside className="w-72 glass-light h-screen fixed left-0 top-0 border-r border-white/20 flex flex-col z-50">
-      <div className="p-8">
-        <h1 className="text-[#D64000] text-2xl font-black italic tracking-tighter uppercase"><span className="text-[#FFB800]">ཨོ་ལོ</span> PIZZA</h1>
-        <p className="text-[10px] text-gray-300 font-bold tracking-widest mt-1">ADMIN PORTAL</p>
-      </div>
+        <div className="p-8">
+          <div className="group/brand cursor-default">
+            <div className="font-black italic tracking-tighter uppercase leading-none transition-all duration-300 group-hover/brand:scale-105">
+              <div className="text-[#D64000] text-3xl transition-all duration-300 group-hover/brand:drop-shadow-[0_0_10px_rgba(214,64,0,0.4)]">OLO</div>
+              <div className="text-[#FFB800] text-3xl -mt-1 transition-all duration-300 group-hover/brand:drop-shadow-[0_0_10px_rgba(255,184,0,0.4)]">PIZZA</div>
+            </div>
+            <div className="text-[10px] text-gray-300 font-bold tracking-[0.25em] mt-1 transition-all duration-300 group-hover/brand:tracking-[0.4em]">ཨོ་ལོ</div>
+          </div>
+          <p className="text-[10px] text-gray-300 font-bold tracking-widest mt-2">ADMIN PORTAL</p>
+        </div>
 
       <nav className="flex-1 px-4 space-y-1">
         {menuItems.map((item) => (

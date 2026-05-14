@@ -55,10 +55,12 @@ export default function Home() {
       <div className="absolute inset-0 bg-kira-pattern opacity-[0.015] pointer-events-none" />
       <div className="w-full max-w-sm space-y-8 text-center">
         <header className="mb-10">
-          <h1 className="text-4xl font-black italic tracking-tighter">
-            <span className="text-[#D64000]">ཨོ་ལོ</span> <span className="text-[#FFB800]">PIZZA</span>
+          <h1 className="flex flex-col items-center leading-none group/title cursor-default">
+            <span className="text-5xl font-black italic tracking-tighter transition-all duration-300 group-hover/title:scale-110 group-hover/title:drop-shadow-[0_0_15px_rgba(214,64,0,0.4)]" style={{ color: '#D64000' }}>OLO</span>
+            <span className="text-5xl font-black italic tracking-tighter -mt-2 transition-all duration-300 group-hover/title:scale-110 group-hover/title:drop-shadow-[0_0_15px_rgba(255,184,0,0.4)]" style={{ color: '#FFB800' }}>PIZZA</span>
+            <span className="text-[11px] text-gray-300 font-bold tracking-[0.3em] mt-2 transition-all duration-300 group-hover/title:tracking-[0.5em]">ཨོ་ལོ</span>
           </h1>
-          <p className="text-gray-400 font-bold text-xs uppercase tracking-widest mt-2">Gelephu, Bhutan</p>
+          <p className="text-gray-400 font-bold text-xs uppercase tracking-widest mt-3">Gelephu, Bhutan</p>
         </header>
 
         {step === 'landing' && (

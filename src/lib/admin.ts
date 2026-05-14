@@ -31,14 +31,30 @@ function hasAdminRoleInMetadata(user: User): boolean {
 }
 
 export function hasAdminAccess(user?: User | null) {
-  if (!user) return false;
+  if (!user) {
+    console.warn('[admin] hasAdminAccess called with no user');
+    return false;
+  }
 
-  if (hasAdminRoleInMetadata(user)) return true;
+  console.log('[admin] checking access for', user.email, 'user_metadata:', user.user_metadata, 'app_metadata:', user.app_metadata);
 
-  if (user.email && HARDCODED_ADMINS.has(user.email.toLowerCase())) return true;
+  if (hasAdminRoleInMetadata(user)) {
+    console.log('[admin] granted via metadata role');
+    return true;
+  }
+
+  if (user.email && HARDCODED_ADMINS.has(user.email.toLowerCase())) {
+    console.log('[admin] granted via hardcoded admin list');
+    return true;
+  }
 
   const allowedEmails = configuredAdminEmails();
-  if (allowedEmails.length === 0) return true;
+  if (allowedEmails.length === 0) {
+    console.log('[admin] VITE_ADMIN_EMAILS empty — allowing all');
+    return true;
+  }
 
-  return Boolean(user.email && allowedEmails.includes(user.email.toLowerCase()));
+  const matched = Boolean(user.email && allowedEmails.includes(user.email.toLowerCase()));
+  console.log('[admin] email whitelist check:', matched, '| allowed:', allowedEmails);
+  return matched;
 }

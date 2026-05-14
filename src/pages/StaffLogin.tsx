@@ -95,6 +95,8 @@ export default function StaffLogin() {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-6 relative overflow-hidden">
         <div className="absolute inset-0 bg-kira-pattern opacity-30" />
+        <div className="absolute top-20 left-10 w-24 h-24 rounded-full bg-[#D64000]/5 blur-3xl animate-float" />
+        <div className="absolute bottom-20 right-10 w-32 h-32 rounded-full bg-[#FFB800]/5 blur-3xl animate-float" style={{ animationDelay: '1.5s' }} />
         <form onSubmit={handleUpdatePassword} className="max-w-md w-full glass-card p-8 sm:p-10 rounded-[2rem] shadow-2xl text-center relative z-10">
           <div className="bg-orange-50 w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-inner">
             <KeyRound className="text-[#D64000]" size={32} />
@@ -188,6 +190,9 @@ export default function StaffLogin() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-6 relative overflow-hidden">
       <div className="absolute inset-0 bg-kira-pattern opacity-30" />
+      <div className="absolute top-20 left-10 w-24 h-24 rounded-full bg-[#D64000]/5 blur-3xl animate-float" />
+      <div className="absolute bottom-20 right-10 w-32 h-32 rounded-full bg-[#FFB800]/5 blur-3xl animate-float" style={{ animationDelay: '1.5s' }} />
+      <div className="absolute top-40 right-20 w-16 h-16 rounded-full bg-[#D64000]/5 blur-2xl animate-float" style={{ animationDelay: '0.8s' }} />
       <button 
         onClick={() => navigate('/')}
         className="mb-8 flex items-center gap-2 text-gray-400 font-bold text-xs hover:text-gray-900 transition-colors"
@@ -200,12 +205,12 @@ export default function StaffLogin() {
            <LogIn className="text-[#D64000]" size={32} />
         </div>
         
-        <h1 className="text-3xl font-black mb-2 italic tracking-tighter group/title cursor-default">
-          <span className="text-[#D64000] inline-block transition-all duration-300 group-hover/title:scale-110 group-hover/title:drop-shadow-[0_0_12px_rgba(214,64,0,0.5)]">ཨོ་ལོ</span>{' '}
-          <span className="text-[#FFB800] inline-block transition-all duration-300 group-hover/title:scale-110 group-hover/title:drop-shadow-[0_0_12px_rgba(255,184,0,0.5)] group-hover/title:-rotate-2">PIZZA</span>
-          <span className="text-gray-300 inline-block transition-all duration-300 group-hover/title:scale-105 ml-1">PORTAL</span>
+        <h1 className="font-black italic tracking-tighter leading-none group/title cursor-default">
+          <div className="text-[#D64000] text-4xl transition-all duration-300 group-hover/title:scale-110 group-hover/title:drop-shadow-[0_0_12px_rgba(214,64,0,0.5)]">OLO</div>
+          <div className="text-[#FFB800] text-4xl -mt-1 transition-all duration-300 group-hover/title:scale-110 group-hover/title:drop-shadow-[0_0_12px_rgba(255,184,0,0.5)] group-hover/title:-rotate-2">PIZZA</div>
+          <div className="text-gray-300 text-[11px] tracking-[0.3em] font-bold mt-1 transition-all duration-300 group-hover/title:tracking-[0.5em]">ཨོ་ལོ</div>
+          <p className="text-gray-400 mt-3 font-bold text-[10px] uppercase tracking-widest">Administrative Access Only</p>
         </h1>
-        <p className="text-gray-400 mb-10 font-bold text-xs uppercase tracking-widest">Administrative Access Only</p>
 
         <div className="space-y-4 text-left">
           <label className="block">
