@@ -38,10 +38,9 @@ const Sidebar = () => {
         <div className="p-8">
           <div className="group/brand cursor-default">
             <div className="font-black italic tracking-tighter uppercase leading-none transition-all duration-300 group-hover/brand:scale-105">
-              <div className="text-[#D64000] text-3xl transition-all duration-300 group-hover/brand:drop-shadow-[0_0_10px_rgba(214,64,0,0.4)]">OLO</div>
+              <div className="text-[#D64000] text-3xl transition-all duration-300 group-hover/brand:drop-shadow-[0_0_10px_rgba(214,64,0,0.4)]">ཨོ་ལོ</div>
               <div className="text-[#FFB800] text-3xl -mt-1 transition-all duration-300 group-hover/brand:drop-shadow-[0_0_10px_rgba(255,184,0,0.4)]">PIZZA</div>
             </div>
-            <div className="text-[10px] text-gray-300 font-bold tracking-[0.25em] mt-1 transition-all duration-300 group-hover/brand:tracking-[0.4em]">ཨོ་ལོ</div>
           </div>
           <p className="text-[10px] text-gray-300 font-bold tracking-widest mt-2">ADMIN PORTAL</p>
         </div>

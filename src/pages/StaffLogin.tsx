@@ -206,9 +206,8 @@ export default function StaffLogin() {
         </div>
         
         <h1 className="font-black italic tracking-tighter leading-none group/title cursor-default">
-          <div className="text-[#D64000] text-4xl transition-all duration-300 group-hover/title:scale-110 group-hover/title:drop-shadow-[0_0_12px_rgba(214,64,0,0.5)]">OLO</div>
+          <div className="text-[#D64000] text-4xl transition-all duration-300 group-hover/title:scale-110 group-hover/title:drop-shadow-[0_0_12px_rgba(214,64,0,0.5)]">ཨོ་ལོ</div>
           <div className="text-[#FFB800] text-4xl -mt-1 transition-all duration-300 group-hover/title:scale-110 group-hover/title:drop-shadow-[0_0_12px_rgba(255,184,0,0.5)] group-hover/title:-rotate-2">PIZZA</div>
-          <div className="text-gray-300 text-[11px] tracking-[0.3em] font-bold mt-1 transition-all duration-300 group-hover/title:tracking-[0.5em]">ཨོ་ལོ</div>
           <p className="text-gray-400 mt-3 font-bold text-[10px] uppercase tracking-widest">Administrative Access Only</p>
         </h1>
 

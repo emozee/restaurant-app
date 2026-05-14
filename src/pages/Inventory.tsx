@@ -466,9 +466,8 @@ export default function CustomerMenu() {
         <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center gap-4">
           <div className="min-w-0">
             <h1 className="font-black italic uppercase tracking-tighter leading-none">
-              <span className="text-[#D64000] text-xl">OLO</span>{' '}
+              <span className="text-[#D64000] text-xl">ཨོ་ལོ</span>{' '}
               <span className="text-[#FFB800] text-xl">PIZZA</span>
-              <span className="text-[8px] text-gray-300 font-bold tracking-[0.2em] ml-2">ཨོ་ལོ</span>
             </h1>
             <button
               type="button"
