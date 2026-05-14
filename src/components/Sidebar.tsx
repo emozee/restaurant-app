@@ -34,9 +34,9 @@ const Sidebar = () => {
   ];
 
   return (
-    <aside className="w-72 bg-white h-screen fixed left-0 top-0 border-r border-gray-100 flex flex-col z-50">
+    <aside className="w-72 glass-light h-screen fixed left-0 top-0 border-r border-white/20 flex flex-col z-50">
       <div className="p-8">
-        <h1 className="text-[#FF5C00] text-2xl font-black italic tracking-tighter uppercase">GMC Restro</h1>
+        <h1 className="text-[#D64000] text-2xl font-black italic tracking-tighter uppercase"><span className="text-[#FFB800]">OLO</span> PIZZA</h1>
         <p className="text-[10px] text-gray-300 font-bold tracking-widest mt-1">ADMIN PORTAL</p>
       </div>
 
@@ -47,7 +47,7 @@ const Sidebar = () => {
             to={item.path}
             className={({ isActive }) =>
               `flex items-center gap-4 px-6 py-4 rounded-2xl font-bold transition-all duration-200 ${
-                isActive ? "bg-[#FFF5F0] text-[#FF5C00] shadow-sm" : "text-gray-400 hover:bg-gray-50 hover:text-gray-600"
+                isActive ? "bg-[#FFF0E8] text-[#D64000] shadow-sm" : "text-gray-400 hover:bg-gray-50 hover:text-gray-600"
               }`
             }
           >
@@ -59,7 +59,7 @@ const Sidebar = () => {
 
       <div className="p-8 border-t border-gray-50">
         <div className="flex items-center gap-3 px-2 mb-4">
-          <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center text-[#FF5C00] font-bold text-xs">
+          <div className="w-8 h-8 rounded-full bg-[#FFF0E8] flex items-center justify-center text-[#D64000] font-bold text-xs">
             {session.user?.email?.charAt(0).toUpperCase()}
           </div>
           <div className="flex-1 min-w-0">

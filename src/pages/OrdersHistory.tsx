@@ -21,17 +21,18 @@ export default function OrdersHistory() {
     const { data, error } = await supabase
       .from("orders")
       .select("*")
+      .eq("status", "completed")
       .order("created_at", { ascending: false });
 
     if (data && !error) {
       setOrders(data);
-      const total = data.reduce((acc, order) => acc + order.total_amount, 0);
+      const total = data.reduce((acc, order) => acc + (order.total_amount || 0), 0);
       setStats({ totalSales: total, orderCount: data.length });
     }
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 md:p-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-50 to-orange-50/30 p-4 md:p-8">
       <div className="max-w-6xl mx-auto">
         {/* HEADER with ChevronLeft to solve the warning */}
         <header className="mb-8">
@@ -46,7 +47,7 @@ export default function OrdersHistory() {
 
         {/* STATS CARDS */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <div className="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-100 relative overflow-hidden">
+          <div className="glass-card p-6 rounded-[2rem] relative overflow-hidden">
             {/* DollarSign used here as a background decoration to solve the warning */}
             <DollarSign
               className="absolute -right-4 -bottom-4 text-orange-50 opacity-10"
@@ -63,7 +64,7 @@ export default function OrdersHistory() {
             </h2>
           </div>
 
-          <div className="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-100">
+          <div className="glass-card p-6 rounded-[2rem]">
             <div className="flex items-center gap-4 mb-2 text-blue-600">
               <Package size={24} />
               <span className="font-black uppercase text-xs tracking-widest">
@@ -77,7 +78,7 @@ export default function OrdersHistory() {
         </div>
 
         {/* ORDER LIST */}
-        <div className="bg-white rounded-[2.5rem] shadow-sm border border-gray-100 overflow-hidden">
+        <div className="glass-card rounded-[2.5rem] overflow-hidden">
           <div className="p-6 border-b border-gray-50 bg-gray-50/50 flex justify-between items-center">
             <h3 className="font-black text-gray-900">Recent Sales</h3>
             <div className="text-[10px] font-black uppercase text-gray-400 bg-white px-3 py-1 rounded-full border border-gray-100">

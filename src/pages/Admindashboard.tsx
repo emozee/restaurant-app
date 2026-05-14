@@ -186,17 +186,17 @@ export default function AdminDashboard() {
   if (loading) {
     return (
       <div className="h-screen flex items-center justify-center bg-gray-50">
-        <Loader2 className="animate-spin text-[#FF5C00]" size={40} />
+        <Loader2 className="animate-spin text-[#D64000]" size={40} />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 md:p-8 text-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-50 to-orange-50/30 p-4 md:p-8 text-gray-900">
       <div className="max-w-7xl mx-auto">
         <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
           <div>
-            <p className="text-[10px] font-black text-[#FF5C00] uppercase tracking-widest mb-2">
+            <p className="text-[10px] font-black text-[#D64000] uppercase tracking-widest mb-2">
               Admin Dashboard
             </p>
             <h1 className="text-3xl md:text-4xl font-black italic tracking-tighter">
@@ -206,29 +206,29 @@ export default function AdminDashboard() {
           <button
             type="button"
             onClick={fetchOrders}
-            className="flex items-center justify-center gap-2 bg-white border border-gray-100 text-gray-500 px-5 py-3 rounded-2xl font-black text-xs uppercase hover:text-gray-900 transition"
+            className="flex items-center justify-center gap-2 glass-card text-gray-500 px-5 py-3 rounded-2xl font-black text-xs uppercase hover:text-gray-900 transition"
           >
             <RefreshCw size={16} /> Refresh
           </button>
         </header>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <div className="bg-white rounded-[2rem] p-5 border border-gray-100 shadow-sm">
-            <ReceiptText className="text-[#FF5C00] mb-4" size={24} />
+          <div className="glass-card rounded-[2rem] p-5">
+            <ReceiptText className="text-[#D64000] mb-4" size={24} />
             <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Active Orders</p>
             <p className="text-3xl font-black mt-1">{orders.length}</p>
           </div>
-          <div className="bg-white rounded-[2rem] p-5 border border-gray-100 shadow-sm">
+          <div className="glass-card rounded-[2rem] p-5">
             <Table2 className="text-gray-900 mb-4" size={24} />
             <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Table Groups</p>
             <p className="text-3xl font-black mt-1">{tableGroupCount}</p>
           </div>
-          <div className="bg-white rounded-[2rem] p-5 border border-gray-100 shadow-sm">
+          <div className="glass-card rounded-[2rem] p-5">
             <ShoppingBag className="text-blue-600 mb-4" size={24} />
             <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Takeaway</p>
             <p className="text-3xl font-black mt-1">{takeawayCount}</p>
           </div>
-          <div className="bg-white rounded-[2rem] p-5 border border-gray-100 shadow-sm">
+          <div className="glass-card rounded-[2rem] p-5">
             <CheckCircle2 className="text-green-600 mb-4" size={24} />
             <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Open Value</p>
             <p className="text-3xl font-black mt-1">Nu. {activeTotal.toFixed(0)}</p>
@@ -236,7 +236,7 @@ export default function AdminDashboard() {
         </div>
 
         {groups.length === 0 ? (
-          <div className="bg-white rounded-[2rem] border border-gray-100 p-12 text-center">
+          <div className="glass-card rounded-[2rem] p-12 text-center">
             <Clock className="mx-auto text-gray-200 mb-4" size={56} />
             <p className="text-xl font-black text-gray-400">No live orders yet</p>
           </div>
@@ -253,7 +253,7 @@ export default function AdminDashboard() {
               return (
                 <article
                   key={group.key}
-                  className="bg-white rounded-[2rem] border border-gray-100 shadow-sm overflow-hidden"
+                  className="glass-card rounded-[2rem] overflow-hidden"
                 >
                   <div className="p-5 border-b border-gray-100 flex items-start justify-between gap-4">
                     <div className="flex items-center gap-4">
@@ -261,7 +261,7 @@ export default function AdminDashboard() {
                         group.kind === "table"
                           ? "bg-gray-900 text-white"
                           : group.kind === "dine-in"
-                            ? "bg-orange-50 text-[#FF5C00]"
+                            ? "bg-[#FFF0E8] text-[#D64000]"
                             : "bg-blue-50 text-blue-600"
                       }`}>
                         {group.kind === "table" && <Table2 size={22} />}
@@ -283,16 +283,16 @@ export default function AdminDashboard() {
                   <div className="p-5">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5">
                       {combinedItems.map((item) => (
-                        <div key={`${group.key}-${item.name}`} className="bg-gray-50 rounded-2xl p-4">
+                        <div key={`${group.key}-${item.name}`} className="bg-white/60 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
                           <p className="font-black text-sm text-gray-800">{item.quantity}x {item.name}</p>
-                          <p className="text-xs font-bold text-[#FF5C00] mt-1">Nu. {item.total.toFixed(0)}</p>
+                          <p className="text-xs font-bold text-[#D64000] mt-1">Nu. {item.total.toFixed(0)}</p>
                         </div>
                       ))}
                     </div>
 
                     <div className="space-y-3">
                       {group.orders.map((order) => (
-                        <div key={order.id} className="rounded-2xl border border-gray-100 p-4">
+                        <div key={order.id} className="rounded-2xl bg-white/50 backdrop-blur-sm p-4">
                           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
                             <div>
                               <div className="flex items-center gap-2 font-black text-gray-900">
@@ -313,7 +313,7 @@ export default function AdminDashboard() {
                                   minute: "2-digit",
                                 })}
                               </p>
-                              <p className="font-black text-[#FF5C00]">Nu. {Number(order.total_amount || 0).toFixed(0)}</p>
+                              <p className="font-black text-[#D64000]">Nu. {Number(order.total_amount || 0).toFixed(0)}</p>
                             </div>
                           </div>
                           <div className="flex flex-wrap gap-2">

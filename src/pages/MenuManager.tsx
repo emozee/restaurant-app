@@ -83,7 +83,7 @@ export default function MenuManagement() {
 
   if (loading) return (
     <div className="h-screen flex items-center justify-center">
-      <Loader2 className="animate-spin text-[#FF5C00]" size={40} />
+      <Loader2 className="animate-spin text-[#D64000]" size={40} />
     </div>
   );
 
@@ -95,7 +95,7 @@ export default function MenuManagement() {
   }, {});
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6 md:p-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-50 to-orange-50/30 p-6 md:p-8">
       <div className="max-w-5xl mx-auto">
         <div className="flex justify-between items-center mb-8">
           <div>
@@ -104,7 +104,7 @@ export default function MenuManagement() {
           </div>
           <button
             onClick={openAdd}
-            className="flex items-center gap-2 bg-[#FF5C00] text-white px-5 py-3 rounded-2xl font-black shadow-lg hover:brightness-110 transition active:scale-95"
+            className="flex items-center gap-2 bg-[#D64000] text-white px-5 py-3 rounded-2xl font-black shadow-lg hover:brightness-110 transition active:scale-95"
           >
             <Plus size={18} /> Add Item
           </button>
@@ -112,7 +112,7 @@ export default function MenuManagement() {
 
         {/* ADD / EDIT FORM */}
         {isFormOpen && (
-          <div className="bg-white rounded-[2rem] p-6 shadow-sm border border-gray-100 mb-8">
+          <div className="glass-card rounded-[2rem] p-6 mb-8">
             <div className="flex justify-between items-center mb-5">
               <h2 className="font-black text-lg uppercase italic">{editItem ? "Edit Item" : "Add New Item"}</h2>
               <button onClick={() => { setEditItem(null); setShowAddForm(false); }} className="p-2 hover:bg-gray-100 rounded-full">
@@ -124,7 +124,7 @@ export default function MenuManagement() {
               <div>
                 <label className="text-[10px] font-black uppercase text-gray-400 block mb-1 ml-1">Item Name *</label>
                 <input
-                  className="w-full p-3 bg-gray-50 rounded-2xl text-sm font-bold outline-none focus:ring-2 focus:ring-orange-100"
+                  className="w-full p-3 bg-white/80 backdrop-blur-sm rounded-2xl text-sm font-bold outline-none focus:ring-2 focus:ring-orange-100"
                   placeholder="e.g. Butter Chicken"
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -133,7 +133,7 @@ export default function MenuManagement() {
               <div>
                 <label className="text-[10px] font-black uppercase text-gray-400 block mb-1 ml-1">Price (Nu.) *</label>
                 <input
-                  className="w-full p-3 bg-gray-50 rounded-2xl text-sm font-bold outline-none focus:ring-2 focus:ring-orange-100"
+                  className="w-full p-3 bg-white/80 backdrop-blur-sm rounded-2xl text-sm font-bold outline-none focus:ring-2 focus:ring-orange-100"
                   placeholder="e.g. 150"
                   type="number"
                   value={form.price}
@@ -143,7 +143,7 @@ export default function MenuManagement() {
               <div>
                 <label className="text-[10px] font-black uppercase text-gray-400 block mb-1 ml-1">Category</label>
                 <input
-                  className="w-full p-3 bg-gray-50 rounded-2xl text-sm font-bold outline-none focus:ring-2 focus:ring-orange-100"
+                  className="w-full p-3 bg-white/80 backdrop-blur-sm rounded-2xl text-sm font-bold outline-none focus:ring-2 focus:ring-orange-100"
                   placeholder="e.g. Main Course"
                   value={form.category}
                   onChange={(e) => setForm({ ...form, category: e.target.value })}
@@ -152,7 +152,7 @@ export default function MenuManagement() {
               <div>
                 <label className="text-[10px] font-black uppercase text-gray-400 block mb-1 ml-1">Photo</label>
                 <div className="flex gap-2 items-center">
-                  <label className="flex-1 flex items-center gap-2 p-3 bg-gray-50 rounded-2xl cursor-pointer hover:bg-gray-100 transition">
+                  <label className="flex-1 flex items-center gap-2 p-3 bg-white/80 backdrop-blur-sm rounded-2xl cursor-pointer hover:bg-white/90 transition border border-white/20">
                     <input type="file" accept="image/*" className="hidden" onChange={handleImageUpload} />
                     {uploading ? <Loader2 size={16} className="animate-spin text-orange-500" /> : <Upload size={16} className="text-gray-400" />}
                     <span className="text-sm font-bold text-gray-400">{uploading ? "Uploading..." : "Upload Photo"}</span>
@@ -168,7 +168,7 @@ export default function MenuManagement() {
               <button
                 onClick={handleSave}
                 disabled={saving}
-                className="flex-1 bg-[#FF5C00] text-white p-4 rounded-2xl font-black shadow-lg disabled:opacity-50 active:scale-95 transition"
+                className="flex-1 bg-[#D64000] text-white p-4 rounded-2xl font-black shadow-lg disabled:opacity-50 active:scale-95 transition"
               >
                 {saving ? <Loader2 className="animate-spin mx-auto" size={20} /> : editItem ? "Save Changes" : "Add to Menu"}
               </button>
@@ -188,7 +188,7 @@ export default function MenuManagement() {
             <h2 className="text-xs font-black uppercase text-gray-300 tracking-widest mb-4">{cat}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {catItems.map((item: any) => (
-                <div key={item.id} className="bg-white rounded-[2rem] border border-gray-100 shadow-sm overflow-hidden flex items-center gap-4 p-4">
+                <div key={item.id} className="glass-card rounded-[2rem] overflow-hidden flex items-center gap-4 p-4">
                   <div className="w-16 h-16 rounded-2xl bg-gray-50 overflow-hidden shrink-0">
                     {item.image_url
                       ? <img src={item.image_url} className="w-full h-full object-cover" alt={item.name} />
@@ -196,7 +196,7 @@ export default function MenuManagement() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="font-black text-gray-800 truncate">{item.name}</p>
-                    <p className="text-[#FF5C00] font-black text-sm">Nu. {item.price}</p>
+                    <p className="text-[#D64000] font-black text-sm">Nu. {item.price}</p>
                   </div>
                   <div className="flex gap-2 shrink-0">
                     <button

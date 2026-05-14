@@ -9,20 +9,38 @@ function configuredAdminEmails() {
     .filter(Boolean);
 }
 
+function extractRole(user: User): string {
+  const meta = user.user_metadata || {};
+  const appMeta = user.app_metadata || {};
+
+  const candidates = [
+    meta.role, meta.user_role, meta.admin_role,
+    appMeta.role, appMeta.user_role, appMeta.admin_role,
+  ];
+
+  for (const c of candidates) {
+    if (c && ADMIN_ROLES.has(String(c).toLowerCase())) {
+      return String(c).toLowerCase();
+    }
+  }
+
+  const plain = String(candidates.find(Boolean) || '');
+  return plain.toLowerCase();
+}
+
 export function hasAdminAccess(user?: User | null) {
   if (!user) return false;
 
-  const role = String(
-    user.app_metadata?.role ||
-      user.app_metadata?.user_role ||
-      user.user_metadata?.role ||
-      '',
-  ).toLowerCase();
-
-  if (ADMIN_ROLES.has(role)) return true;
+  if (ADMIN_ROLES.has(extractRole(user))) return true;
 
   const allowedEmails = configuredAdminEmails();
-  if (allowedEmails.length === 0) return true;
+  if (allowedEmails.length === 0) {
+    if (import.meta.env.DEV) {
+      console.warn("VITE_ADMIN_EMAILS is empty — all authenticated users are treated as admins. Set VITE_ADMIN_EMAILS in production.");
+      return true;
+    }
+    return false;
+  }
 
   return Boolean(user.email && allowedEmails.includes(user.email.toLowerCase()));
 }

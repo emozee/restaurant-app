@@ -27,10 +27,13 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center justify-center p-6">
+    <div className="min-h-screen bg-white flex flex-col items-center justify-center p-6 relative">
+      <div className="absolute inset-0 bg-kira-pattern opacity-[0.015] pointer-events-none" />
       <div className="w-full max-w-sm space-y-8 text-center">
         <header className="mb-10">
-          <h1 className="text-4xl font-black italic tracking-tighter text-gray-900">GMC EXPRESS</h1>
+          <h1 className="text-4xl font-black italic tracking-tighter">
+            <span className="text-[#D64000]">OLO</span> <span className="text-[#FFB800]">PIZZA</span>
+          </h1>
           <p className="text-gray-400 font-bold text-xs uppercase tracking-widest mt-2">Gelephu, Bhutan</p>
         </header>
 
@@ -38,7 +41,7 @@ export default function Home() {
           <div className="grid gap-4">
             <button
               onClick={() => setStep('choose')}
-              className="group flex flex-col items-center justify-center bg-[#FF5C00] text-white p-10 rounded-[2.5rem] transition-all active:scale-95 shadow-xl shadow-orange-200"
+              className="group flex flex-col items-center justify-center bg-[#D64000] text-white p-10 rounded-[2.5rem] transition-all active:scale-95 shadow-xl shadow-orange-200"
             >
               <ShoppingBag size={44} className="mb-4 group-hover:scale-110 transition-transform" />
               <span className="font-black text-xl uppercase tracking-tight">Order Now</span>
@@ -70,7 +73,7 @@ export default function Home() {
 
             <button
               onClick={() => handleChoose('takeaway')}
-              className="group w-full flex items-center gap-5 bg-[#FF5C00] text-white p-7 rounded-[2rem] transition-all active:scale-95 shadow-xl shadow-orange-200"
+              className="group w-full flex items-center gap-5 bg-[#D64000] text-white p-7 rounded-[2rem] transition-all active:scale-95 shadow-xl shadow-orange-200"
             >
               <ShoppingBag size={36} className="group-hover:scale-110 transition-transform shrink-0" />
               <div className="text-left">
@@ -89,11 +92,11 @@ export default function Home() {
         )}
 
         {step === 'form' && (
-          <form onSubmit={handleSubmit} className="bg-gray-50 p-8 rounded-[2.5rem] text-left">
+          <form onSubmit={handleSubmit} className="glass-card p-8 rounded-[2.5rem] text-left">
             <div className="flex items-center gap-3 mb-6">
               {orderType === 'dine-in'
                 ? <UtensilsCrossed size={20} className="text-gray-700" />
-                : <ShoppingBag size={20} className="text-[#FF5C00]" />}
+                : <ShoppingBag size={20} className="text-[#D64000]" />}
               <h2 className="text-lg font-black uppercase italic">
                 {orderType === 'dine-in' ? 'Dine-In Details' : 'Takeaway Details'}
               </h2>
@@ -123,7 +126,7 @@ export default function Home() {
               </div>
               <button
                 type="submit"
-                className="w-full bg-[#FF5C00] text-white p-4 rounded-2xl font-black shadow-lg mt-2 active:scale-95 transition-all"
+                className="w-full bg-[#D64000] text-white p-4 rounded-2xl font-black shadow-lg mt-2 active:scale-95 transition-all"
               >
                 VIEW MENU
               </button>

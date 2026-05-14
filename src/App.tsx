@@ -26,10 +26,10 @@ function LoadingScreen() {
   return (
     <div className="h-screen flex items-center justify-center bg-[#0f0f0f]">
       <div className="flex flex-col items-center gap-4">
-        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center animate-pulse">
-          <span className="text-white font-black text-xl">G</span>
+        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#D64000] to-[#FFB800] flex items-center justify-center animate-pulse">
+          <span className="text-white font-black text-xl font-[Playfair_Display] italic">O</span>
         </div>
-        <div className="w-6 h-6 border-2 border-orange-500 border-t-transparent rounded-full animate-spin" />
+        <div className="w-6 h-6 border-2 border-[#D64000] border-t-transparent rounded-full animate-spin" />
       </div>
     </div>
   );

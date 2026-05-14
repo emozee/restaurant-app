@@ -44,7 +44,8 @@ export default function StaffLogin() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-6">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-6 relative overflow-hidden">
+      <div className="absolute inset-0 bg-kira-pattern opacity-30" />
       <button 
         onClick={() => navigate('/')}
         className="mb-8 flex items-center gap-2 text-gray-400 font-bold text-xs hover:text-gray-900 transition-colors"
@@ -52,12 +53,12 @@ export default function StaffLogin() {
         <ArrowLeft size={14} /> BACK TO CUSTOMER VIEW
       </button>
 
-      <form onSubmit={handleEmailLogin} className="max-w-md w-full bg-white p-8 sm:p-10 rounded-[2rem] shadow-2xl text-center border border-gray-100">
+      <form onSubmit={handleEmailLogin} className="max-w-md w-full glass-card p-8 sm:p-10 rounded-[2rem] shadow-2xl text-center">
         <div className="bg-orange-50 w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-inner">
-           <LogIn className="text-[#FF5C00]" size={32} />
+           <LogIn className="text-[#D64000]" size={32} />
         </div>
         
-        <h1 className="text-3xl font-black mb-2 italic tracking-tighter">GMC PORTAL</h1>
+        <h1 className="text-3xl font-black mb-2 italic tracking-tighter"><span className="text-[#D64000]">OLO</span> <span className="text-[#FFB800]">PIZZA</span> PORTAL</h1>
         <p className="text-gray-400 mb-10 font-bold text-xs uppercase tracking-widest">Administrative Access Only</p>
 
         <div className="space-y-4 text-left">

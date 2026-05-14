@@ -263,7 +263,7 @@ export default function CustomerMenu() {
   if (loading) {
     return (
       <div className="h-screen flex items-center justify-center bg-white">
-        <Loader2 className="animate-spin text-[#FF5C00]" size={40} />
+        <Loader2 className="animate-spin text-[#D64000]" size={40} />
       </div>
     );
   }
@@ -273,10 +273,10 @@ export default function CustomerMenu() {
       <div className="min-h-screen bg-white flex items-center justify-center p-6">
         <form
           onSubmit={saveCustomerDetails}
-          className="w-full max-w-md bg-gray-50 rounded-[2rem] p-7 sm:p-8 shadow-sm border border-gray-100"
+          className="w-full max-w-md glass-card rounded-[2rem] p-7 sm:p-8 shadow-sm"
         >
           <div className="flex items-center gap-4 mb-7">
-            <div className="w-14 h-14 rounded-2xl bg-[#FF5C00] text-white flex items-center justify-center">
+            <div className="w-14 h-14 rounded-2xl bg-[#D64000] text-white flex items-center justify-center">
               {isTableOrder ? <UtensilsCrossed size={26} /> : <ShoppingBag size={26} />}
             </div>
             <div>
@@ -307,7 +307,7 @@ export default function CustomerMenu() {
                 onClick={() => setCustomerForm((form) => ({ ...form, type: "takeaway" }))}
                 className={`p-4 rounded-2xl font-black text-xs uppercase transition ${
                   customerForm.type === "takeaway"
-                    ? "bg-[#FF5C00] text-white"
+                    ? "bg-[#D64000] text-white"
                     : "bg-white text-gray-400"
                 }`}
               >
@@ -326,7 +326,7 @@ export default function CustomerMenu() {
                   type="text"
                   value={customerForm.name}
                   onChange={(e) => setCustomerForm((form) => ({ ...form, name: e.target.value }))}
-                  className="w-full bg-white text-gray-900 pl-12 pr-4 py-4 rounded-2xl font-bold text-sm outline-none focus:ring-2 focus:ring-orange-100"
+                  className="w-full bg-white/80 backdrop-blur-sm text-gray-900 pl-12 pr-4 py-4 rounded-2xl font-bold text-sm outline-none focus:ring-2 focus:ring-orange-100"
                   placeholder="Enter your name"
                 />
               </div>
@@ -341,7 +341,7 @@ export default function CustomerMenu() {
                   type="tel"
                   value={customerForm.phone}
                   onChange={(e) => setCustomerForm((form) => ({ ...form, phone: e.target.value }))}
-                  className="w-full bg-white text-gray-900 pl-12 pr-4 py-4 rounded-2xl font-bold text-sm outline-none focus:ring-2 focus:ring-orange-100"
+                  className="w-full bg-white/80 backdrop-blur-sm text-gray-900 pl-12 pr-4 py-4 rounded-2xl font-bold text-sm outline-none focus:ring-2 focus:ring-orange-100"
                   placeholder="Enter phone number"
                 />
               </div>
@@ -350,7 +350,7 @@ export default function CustomerMenu() {
 
           <button
             type="submit"
-            className="mt-6 w-full bg-[#FF5C00] text-white p-5 rounded-2xl font-black uppercase shadow-lg active:scale-95 transition"
+            className="mt-6 w-full bg-[#D64000] text-white p-5 rounded-2xl font-black uppercase shadow-lg active:scale-95 transition"
           >
             Continue to Menu
           </button>
@@ -364,15 +364,15 @@ export default function CustomerMenu() {
   return (
     <div className="min-h-screen bg-white font-sans text-gray-900">
       {orderSuccess && (
-        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-[200] bg-green-600 text-white px-6 py-3 rounded-2xl font-black shadow-lg flex items-center gap-2">
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-[200] bg-green-600/80 backdrop-blur-xl text-white px-6 py-3 rounded-2xl font-black shadow-lg flex items-center gap-2 border border-white/10">
           <CheckCircle2 size={18} /> Order placed successfully
         </div>
       )}
 
       {activeOrder && activeOrder.status !== "completed" && (
         <div
-          className={`px-6 py-3 sticky top-0 z-[60] shadow-lg text-white ${
-            activeOrder.status === "cooking" ? "bg-orange-600" : "bg-[#FF5C00]"
+          className={`px-6 py-3 sticky top-0 z-[60] shadow-lg text-white backdrop-blur-xl ${
+            activeOrder.status === "cooking" ? "bg-orange-600/80" : "bg-[#D64000]/80"
           }`}
         >
           <div className="max-w-6xl mx-auto flex items-center gap-3">
@@ -398,11 +398,11 @@ export default function CustomerMenu() {
         </div>
       )}
 
-      <div className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100">
+      <div className="sticky top-0 z-50 glass-nav backdrop-blur-md">
         <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center gap-4">
           <div className="min-w-0">
-            <h1 className="font-black text-[#FF5C00] text-lg italic uppercase tracking-tighter">
-              GMC Restro
+            <h1 className="font-black text-[#D64000] text-lg italic uppercase tracking-tighter">
+              <span className="text-[#FFB800]">OLO</span> Pizza
             </h1>
             <button
               type="button"
@@ -434,7 +434,7 @@ export default function CustomerMenu() {
           >
             <ShoppingCart size={22} />
             {basketCount > 0 && (
-              <span className="absolute -top-1 -right-1 bg-[#FF5C00] text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold">
+              <span className="absolute -top-1 -right-1 bg-[#D64000] text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold">
                 {basketCount}
               </span>
             )}
@@ -449,7 +449,7 @@ export default function CustomerMenu() {
               onClick={() => scrollToCategory(category)}
               className={`px-5 py-2 rounded-full text-[10px] font-black uppercase whitespace-nowrap transition-all ${
                 activeCategory === category
-                  ? "bg-[#FF5C00] text-white"
+                  ? "bg-[#D64000] text-white"
                   : "bg-gray-100 text-gray-400"
               }`}
             >
@@ -482,7 +482,7 @@ export default function CustomerMenu() {
                   return (
                     <div
                       key={item.id}
-                      className="flex items-center gap-4 bg-white p-4 rounded-[2rem] border border-gray-100 shadow-sm hover:shadow-md transition-shadow"
+                      className="flex items-center gap-4 glass-card rounded-[2rem] hover:shadow-md transition-shadow"
                     >
                       <div className="w-20 h-20 rounded-2xl bg-gray-50 overflow-hidden shrink-0">
                         <img
@@ -493,7 +493,7 @@ export default function CustomerMenu() {
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="font-black text-gray-800 text-sm truncate">{item.name}</p>
-                        <p className="text-[#FF5C00] font-black text-sm">Nu. {item.price}</p>
+                        <p className="text-[#D64000] font-black text-sm">Nu. {item.price}</p>
                       </div>
                       <div className="flex items-center gap-1 shrink-0">
                         {qty > 0 && (
@@ -535,7 +535,7 @@ export default function CustomerMenu() {
 
       {isBasketOpen && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[100] flex items-end justify-center">
-          <div className="w-full max-w-md bg-white rounded-t-[2.5rem] p-8 shadow-2xl max-h-[85vh] flex flex-col">
+          <div className="w-full max-w-md glass-light rounded-t-[2.5rem] p-8 shadow-2xl max-h-[85vh] flex flex-col">
             <div className="flex justify-between items-center mb-5">
               <h2 className="text-xl font-black uppercase italic tracking-tighter">Your Cart</h2>
               <div className="flex gap-2">
@@ -558,7 +558,7 @@ export default function CustomerMenu() {
               </div>
             </div>
 
-            <div className="bg-gray-50 rounded-2xl px-4 py-3 mb-4 text-xs font-bold text-gray-500">
+            <div className="bg-white/40 backdrop-blur-sm rounded-2xl px-4 py-3 mb-4 text-xs font-bold text-gray-500 border border-white/10">
               {isTableOrder
                 ? `Table ${tableNumber} order for ${currentCustomer.name}`
                 : `${currentCustomer.type === "dine-in" ? "Dine-in" : "Takeaway"} order for ${currentCustomer.name}`}
@@ -566,10 +566,10 @@ export default function CustomerMenu() {
 
             <div className="flex-1 overflow-y-auto space-y-3 mb-5">
               {basketItems.map((entry) => (
-                <div key={entry.item.id} className="flex justify-between items-center p-4 bg-gray-50 rounded-2xl">
+                <div key={entry.item.id} className="flex justify-between items-center p-4 bg-white/60 backdrop-blur-sm rounded-2xl border border-white/10">
                   <div>
                     <p className="font-black text-gray-800 text-sm">{entry.item.name}</p>
-                    <p className="text-[#FF5C00] text-xs font-bold">
+                    <p className="text-[#D64000] text-xs font-bold">
                       Nu. {entry.item.price} x {entry.qty}
                     </p>
                   </div>
@@ -609,7 +609,7 @@ export default function CustomerMenu() {
                   type="button"
                   onClick={handlePlaceOrder}
                   disabled={isSubmitting}
-                  className="w-full bg-[#FF5C00] text-white p-5 rounded-2xl font-black uppercase shadow-lg disabled:opacity-50 active:scale-95 transition-all"
+                  className="w-full bg-[#D64000] text-white p-5 rounded-2xl font-black uppercase shadow-lg disabled:opacity-50 active:scale-95 transition-all"
                 >
                   {isSubmitting ? <Loader2 className="animate-spin mx-auto" size={24} /> : "Place Order"}
                 </button>

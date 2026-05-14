@@ -79,13 +79,13 @@ export default function Analytics() {
   const isProfitable = netProfit >= 0;
 
   return (
-    <div className="p-6 md:p-8 bg-gray-50 min-h-screen">
+    <div className="p-6 md:p-8 bg-gradient-to-br from-gray-50 via-gray-50 to-orange-50/30 min-h-screen">
       <h1 className="text-3xl font-black mb-2 text-gray-900">Financial Overview</h1>
       <p className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-8">Income - Expenditure - Profit/Loss</p>
 
       {/* SUMMARY CARDS */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mb-8">
-        <div className="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-100">
+        <div className="glass-card p-6 rounded-[2rem]">
           <div className="flex justify-between items-start mb-4">
             <div className="p-3 bg-green-50 text-green-600 rounded-2xl"><DollarSign size={22} /></div>
             <span className="text-[10px] font-black text-green-600 bg-green-50 px-2 py-1 rounded-full flex items-center gap-1"><ArrowUpRight size={12}/> Income</span>
@@ -95,7 +95,7 @@ export default function Analytics() {
           <p className="text-[10px] text-gray-300 font-bold mt-1">Orders: Nu. {orderRevenue.toLocaleString()} + Other: Nu. {totalOtherIncome.toLocaleString()}</p>
         </div>
 
-        <div className="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-100">
+        <div className="glass-card p-6 rounded-[2rem]">
           <div className="flex justify-between items-start mb-4">
             <div className="p-3 bg-red-50 text-red-500 rounded-2xl"><TrendingDown size={22} /></div>
             <span className="text-[10px] font-black text-red-500 bg-red-50 px-2 py-1 rounded-full flex items-center gap-1"><ArrowDownRight size={12}/> Cost</span>
@@ -104,7 +104,7 @@ export default function Analytics() {
           <h2 className="text-2xl font-black mt-1 text-gray-900">Nu. {totalExpenditure.toLocaleString()}</h2>
         </div>
 
-        <div className={`p-6 rounded-[2rem] shadow-sm border col-span-1 md:col-span-2 ${isProfitable ? 'bg-green-50 border-green-100' : 'bg-red-50 border-red-100'}`}>
+        <div className={`p-6 rounded-[2rem] col-span-1 md:col-span-2 glass-card ${isProfitable ? 'border-l-4 border-l-green-400' : 'border-l-4 border-l-red-400'}`}>
           <div className="flex justify-between items-start mb-4">
             <div className={`p-3 rounded-2xl ${isProfitable ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-600'}`}>
               {isProfitable ? <ArrowUpRight size={22} /> : <ArrowDownRight size={22} />}
@@ -123,7 +123,7 @@ export default function Analytics() {
 
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-6">
         {/* OTHER INCOME */}
-        <div className="bg-white p-6 rounded-[2.5rem] shadow-sm border border-gray-100">
+        <div className="glass-card p-6 rounded-[2.5rem]">
           <div className="flex justify-between items-center mb-4">
             <h3 className="font-black text-gray-800">Other Income</h3>
             <button
@@ -135,15 +135,15 @@ export default function Analytics() {
           </div>
 
           {showIncomeForm && (
-            <div className="bg-gray-50 rounded-2xl p-4 mb-4 space-y-3">
+            <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-4 mb-4 space-y-3 border border-white/20">
               <input
-                className="w-full p-3 rounded-xl bg-white text-sm font-bold outline-none border border-gray-100"
+                className="w-full p-3 rounded-xl bg-white/80 backdrop-blur-sm text-sm font-bold outline-none border border-white/30"
                 placeholder="Source (e.g. Catering)"
                 value={newIncome.label}
                 onChange={(e) => setNewIncome({ ...newIncome, label: e.target.value })}
               />
               <input
-                className="w-full p-3 rounded-xl bg-white text-sm font-bold outline-none border border-gray-100"
+                className="w-full p-3 rounded-xl bg-white/80 backdrop-blur-sm text-sm font-bold outline-none border border-white/30"
                 placeholder="Amount (Nu.)"
                 type="number"
                 value={newIncome.amount}
@@ -157,7 +157,7 @@ export default function Analytics() {
 
           <div className="space-y-2 max-h-48 overflow-y-auto">
             {otherIncomes.map((inc) => (
-              <div key={inc.id} className="flex justify-between items-center p-3 bg-gray-50 rounded-xl">
+              <div key={inc.id} className="flex justify-between items-center p-3 bg-white/50 backdrop-blur-sm rounded-xl border border-white/10">
                 <div>
                   <p className="font-black text-gray-800 text-sm">{inc.label}</p>
                   <p className="text-[10px] text-gray-400">{new Date(inc.date).toLocaleDateString()}</p>
@@ -175,7 +175,7 @@ export default function Analytics() {
         </div>
 
         {/* EXPENDITURES */}
-        <div className="bg-white p-6 rounded-[2.5rem] shadow-sm border border-gray-100">
+        <div className="glass-card p-6 rounded-[2.5rem]">
           <div className="flex justify-between items-center mb-4">
             <h3 className="font-black text-gray-800">Expenditures</h3>
             <button
@@ -187,15 +187,15 @@ export default function Analytics() {
           </div>
 
           {showExpForm && (
-            <div className="bg-gray-50 rounded-2xl p-4 mb-4 space-y-3">
+            <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-4 mb-4 space-y-3 border border-white/20">
               <input
-                className="w-full p-3 rounded-xl bg-white text-sm font-bold outline-none border border-gray-100"
+                className="w-full p-3 rounded-xl bg-white/80 backdrop-blur-sm text-sm font-bold outline-none border border-white/30"
                 placeholder="Expense (e.g. Vegetables)"
                 value={newExp.label}
                 onChange={(e) => setNewExp({ ...newExp, label: e.target.value })}
               />
               <input
-                className="w-full p-3 rounded-xl bg-white text-sm font-bold outline-none border border-gray-100"
+                className="w-full p-3 rounded-xl bg-white/80 backdrop-blur-sm text-sm font-bold outline-none border border-white/30"
                 placeholder="Amount (Nu.)"
                 type="number"
                 value={newExp.amount}
@@ -209,7 +209,7 @@ export default function Analytics() {
 
           <div className="space-y-2 max-h-48 overflow-y-auto">
             {expenditures.map((exp) => (
-              <div key={exp.id} className="flex justify-between items-center p-3 bg-gray-50 rounded-xl">
+              <div key={exp.id} className="flex justify-between items-center p-3 bg-white/50 backdrop-blur-sm rounded-xl border border-white/10">
                 <div>
                   <p className="font-black text-gray-800 text-sm">{exp.label}</p>
                   <p className="text-[10px] text-gray-400">{new Date(exp.date).toLocaleDateString()}</p>
@@ -227,7 +227,7 @@ export default function Analytics() {
         </div>
 
         {/* TAX / RECEIPT */}
-        <div className="bg-white p-6 rounded-[2.5rem] shadow-sm border border-gray-100">
+        <div className="glass-card p-6 rounded-[2.5rem]">
           <div className="flex items-center gap-3 mb-4">
             <div className="p-3 bg-blue-50 text-blue-600 rounded-2xl"><ReceiptText size={22} /></div>
             <h3 className="font-black text-gray-800">Summary</h3>
@@ -250,7 +250,7 @@ export default function Analytics() {
       </div>
 
       {/* TOP SELLING CHART */}
-      <div className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-gray-100">
+      <div className="glass-card p-8 rounded-[2.5rem]">
         <div className="flex justify-between items-center mb-6">
           <h3 className="text-xl font-bold text-gray-800">Top Selling Items</h3>
           <span className="text-xs font-black text-orange-500 uppercase tracking-widest bg-orange-50 px-3 py-1 rounded-full">Live Stats</span>
