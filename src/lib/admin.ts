@@ -2,6 +2,11 @@ import type { User } from '@supabase/supabase-js';
 
 const ADMIN_ROLES = new Set(['admin', 'owner', 'manager']);
 
+const HARDCODED_ADMINS = new Set([
+  'nima.eimoze.yoezer@gmail.com',
+  'lhamo5pema@gmail.com',
+]);
+
 function configuredAdminEmails() {
   return (import.meta.env.VITE_ADMIN_EMAILS || '')
     .split(',')
@@ -29,6 +34,8 @@ export function hasAdminAccess(user?: User | null) {
   if (!user) return false;
 
   if (hasAdminRoleInMetadata(user)) return true;
+
+  if (user.email && HARDCODED_ADMINS.has(user.email.toLowerCase())) return true;
 
   const allowedEmails = configuredAdminEmails();
   if (allowedEmails.length === 0) return true;

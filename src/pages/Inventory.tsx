@@ -407,7 +407,7 @@ export default function CustomerMenu() {
             </div>
             <h2 className="text-xl font-black text-gray-900 mb-2">Order Placed!</h2>
             <p className="text-sm font-bold text-gray-500 mb-6">
-              Call <span className="text-[#D64000]">+975 17XXXXXX</span> for further confirmation — we may be busy in the kitchen.
+              Call <span className="text-[#D64000]">+975 17863208</span> for further confirmation — we may be busy in the kitchen.
             </p>
             <div className="flex gap-3">
               <a
@@ -466,7 +466,7 @@ export default function CustomerMenu() {
         <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center gap-4">
           <div className="min-w-0">
             <h1 className="font-black text-[#D64000] text-lg italic uppercase tracking-tighter">
-              <span className="text-[#FFB800]">OLO</span> Pizza
+              <span className="text-[#FFB800]">ཨོ་ལོ</span> Pizza
             </h1>
             <button
               type="button"

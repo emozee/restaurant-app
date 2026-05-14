@@ -36,7 +36,7 @@ const Sidebar = () => {
   return (
     <aside className="w-72 glass-light h-screen fixed left-0 top-0 border-r border-white/20 flex flex-col z-50">
       <div className="p-8">
-        <h1 className="text-[#D64000] text-2xl font-black italic tracking-tighter uppercase"><span className="text-[#FFB800]">OLO</span> PIZZA</h1>
+        <h1 className="text-[#D64000] text-2xl font-black italic tracking-tighter uppercase"><span className="text-[#FFB800]">ཨོ་ལོ</span> PIZZA</h1>
         <p className="text-[10px] text-gray-300 font-bold tracking-widest mt-1">ADMIN PORTAL</p>
       </div>
 

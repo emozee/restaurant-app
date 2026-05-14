@@ -56,7 +56,7 @@ export default function Home() {
       <div className="w-full max-w-sm space-y-8 text-center">
         <header className="mb-10">
           <h1 className="text-4xl font-black italic tracking-tighter">
-            <span className="text-[#D64000]">OLO</span> <span className="text-[#FFB800]">PIZZA</span>
+            <span className="text-[#D64000]">ཨོ་ལོ</span> <span className="text-[#FFB800]">PIZZA</span>
           </h1>
           <p className="text-gray-400 font-bold text-xs uppercase tracking-widest mt-2">Gelephu, Bhutan</p>
         </header>
