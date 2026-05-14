@@ -372,10 +372,13 @@ export default function CustomerMenu() {
                   placeholder="77XXXXXX"
                 />
               </div>
+              {customerForm.phone.length > 0 && customerForm.phone.length !== 8 && (
+                <p className="text-[10px] font-bold mt-1 ml-2 text-red-500">Enter exactly 8 digits after +975</p>
+              )}
               {phoneCarrier && (
                 <p className="text-[10px] font-bold mt-1 ml-2 text-gray-500">📶 {phoneCarrier}</p>
               )}
-              {phoneError && (
+              {phoneError && !phoneCarrier && customerForm.phone.length === 8 && (
                 <p className="text-[10px] font-bold mt-1 ml-2 text-red-500">{phoneError}</p>
               )}
             </label>
@@ -424,17 +427,20 @@ export default function CustomerMenu() {
         </div>
       )}
 
-      {activeOrder && activeOrder.status !== "completed" && (
+      {activeOrder && (
         <div
           className={`px-6 py-3 sticky top-0 z-[60] shadow-lg text-white backdrop-blur-xl ${
             activeOrder.status === "cooking" ? "bg-orange-600/80" :
             activeOrder.status === "confirmed" ? "bg-blue-600/80" :
+            activeOrder.status === "completed" ? "bg-green-600/80" :
             "bg-yellow-600/80"
           }`}
         >
           <div className="max-w-6xl mx-auto flex items-center gap-3">
             {activeOrder.status === "cooking" ? (
               <ChefHat size={18} />
+            ) : activeOrder.status === "completed" ? (
+              <CheckCircle2 size={18} />
             ) : (
               <Clock className="animate-pulse" size={18} />
             )}
@@ -442,6 +448,7 @@ export default function CustomerMenu() {
               {activeOrder.status === "pending" && "Waiting for confirmation"}
               {activeOrder.status === "confirmed" && "Order received and queued"}
               {activeOrder.status === "cooking" && "Your order is being prepared"}
+              {activeOrder.status === "completed" && "Your order is completed — enjoy your meal! 🍕"}
             </p>
           </div>
         </div>

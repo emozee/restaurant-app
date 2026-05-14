@@ -150,12 +150,13 @@ export default function Home() {
                     onChange={(e) => handlePhoneChange(e.target.value)}
                   />
                 </div>
-                {phoneCarrier && (
-                  <p className="text-[10px] font-bold mt-1 ml-2 text-gray-500">
-                    {phoneCarrier === 'TashiCell' ? '📶' : '📶'} {phoneCarrier}
-                  </p>
+                {customerInfo.phone.length > 0 && customerInfo.phone.length !== 8 && (
+                  <p className="text-[10px] font-bold mt-1 ml-2 text-red-500">Enter exactly 8 digits after +975</p>
                 )}
-                {phoneError && (
+                {phoneCarrier && (
+                  <p className="text-[10px] font-bold mt-1 ml-2 text-gray-500">📶 {phoneCarrier}</p>
+                )}
+                {phoneError && !phoneCarrier && customerInfo.phone.length === 8 && (
                   <p className="text-[10px] font-bold mt-1 ml-2 text-red-500">{phoneError}</p>
                 )}
               </div>

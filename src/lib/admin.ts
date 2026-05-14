@@ -9,19 +9,26 @@ function configuredAdminEmails() {
     .filter(Boolean);
 }
 
-export function hasAdminAccess(user?: User | null) {
-  if (!user) return false;
-
+function hasAdminRoleInMetadata(user: User): boolean {
   const meta = user.user_metadata || {};
   const appMeta = user.app_metadata || {};
 
-  const role = String(
-    meta.role || meta.user_role ||
-    appMeta.role || appMeta.user_role ||
-    ''
-  ).toLowerCase();
+  const candidates = [
+    meta.role, meta.user_role, meta.admin_role, meta.type,
+    appMeta.role, appMeta.user_role, appMeta.admin_role, appMeta.type,
+  ];
 
-  if (role && ADMIN_ROLES.has(role)) return true;
+  for (const c of candidates) {
+    if (c && ADMIN_ROLES.has(String(c).toLowerCase())) return true;
+  }
+
+  return false;
+}
+
+export function hasAdminAccess(user?: User | null) {
+  if (!user) return false;
+
+  if (hasAdminRoleInMetadata(user)) return true;
 
   const allowedEmails = configuredAdminEmails();
   if (allowedEmails.length === 0) return true;
