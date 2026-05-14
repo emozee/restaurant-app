@@ -1,5 +1,5 @@
 import { supabase } from '../lib/supabase';
-import { LogIn, Loader2, ArrowLeft, Mail, LockKeyhole, KeyRound, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { LogIn, Loader2, ArrowLeft, Mail, LockKeyhole, KeyRound, ArrowRight, CheckCircle2, Eye, EyeOff } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { hasAdminAccess } from '../lib/admin';
@@ -7,6 +7,7 @@ import { hasAdminAccess } from '../lib/admin';
 export default function StaffLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [showReset, setShowReset] = useState(false);
@@ -105,13 +106,18 @@ export default function StaffLogin() {
             <div className="relative">
               <LockKeyhole className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300" size={18} />
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 autoComplete="new-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-gray-50 text-gray-900 pl-12 pr-4 py-4 rounded-2xl font-bold text-sm outline-none focus:ring-2 focus:ring-orange-100"
+                className="w-full bg-gray-50 text-gray-900 pl-12 pr-12 py-4 rounded-2xl font-bold text-sm outline-none focus:ring-2 focus:ring-orange-100"
                 placeholder="Enter new password"
               />
+              <button type="button" onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition"
+              >
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
             </div>
           </label>
           {errorMessage && (
@@ -218,13 +224,18 @@ export default function StaffLogin() {
             <div className="relative">
               <LockKeyhole className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300" size={18} />
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 autoComplete="current-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-gray-50 text-gray-900 pl-12 pr-4 py-4 rounded-2xl font-bold text-sm outline-none focus:ring-2 focus:ring-orange-100"
+                className="w-full bg-gray-50 text-gray-900 pl-12 pr-12 py-4 rounded-2xl font-bold text-sm outline-none focus:ring-2 focus:ring-orange-100"
                 placeholder="Enter password"
               />
+              <button type="button" onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition"
+              >
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
             </div>
           </label>
         </div>
@@ -238,7 +249,7 @@ export default function StaffLogin() {
         <button
           type="submit"
           disabled={loading}
-          className="mt-6 w-full flex items-center justify-center gap-4 bg-gray-900 text-white p-5 rounded-2xl font-black text-sm hover:bg-black transition active:scale-95 disabled:opacity-50 shadow-xl"
+          className="mt-6 w-full flex items-center justify-center gap-4 bg-gray-900 text-white p-5 rounded-2xl font-black text-sm hover:bg-black transition btn-press disabled:opacity-50 shadow-xl"
         >
           {loading ? (
             <Loader2 className="animate-spin" size={20} />

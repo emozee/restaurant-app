@@ -47,7 +47,7 @@ export default function OrdersHistory() {
 
         {/* STATS CARDS */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <div className="glass-card p-6 rounded-[2rem] relative overflow-hidden">
+          <div className="glass-card p-6 rounded-[2rem] relative overflow-hidden hover-lift">
             {/* DollarSign used here as a background decoration to solve the warning */}
             <DollarSign
               className="absolute -right-4 -bottom-4 text-orange-50 opacity-10"
@@ -64,7 +64,7 @@ export default function OrdersHistory() {
             </h2>
           </div>
 
-          <div className="glass-card p-6 rounded-[2rem]">
+          <div className="glass-card p-6 rounded-[2rem] hover-lift">
             <div className="flex items-center gap-4 mb-2 text-blue-600">
               <Package size={24} />
               <span className="font-black uppercase text-xs tracking-widest">

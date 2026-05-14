@@ -192,7 +192,7 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-50 to-orange-50/30 p-4 md:p-8 text-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-50 to-orange-50/30 p-4 md:p-8 text-gray-900 animate-fade-in">
       <div className="max-w-7xl mx-auto">
         <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
           <div>
@@ -213,22 +213,22 @@ export default function AdminDashboard() {
         </header>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <div className="glass-card rounded-[2rem] p-5">
+          <div className="glass-card rounded-[2rem] p-5 hover-lift">
             <ReceiptText className="text-[#D64000] mb-4" size={24} />
             <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Active Orders</p>
             <p className="text-3xl font-black mt-1">{orders.length}</p>
           </div>
-          <div className="glass-card rounded-[2rem] p-5">
+          <div className="glass-card rounded-[2rem] p-5 hover-lift">
             <Table2 className="text-gray-900 mb-4" size={24} />
             <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Table Groups</p>
             <p className="text-3xl font-black mt-1">{tableGroupCount}</p>
           </div>
-          <div className="glass-card rounded-[2rem] p-5">
+          <div className="glass-card rounded-[2rem] p-5 hover-lift">
             <ShoppingBag className="text-blue-600 mb-4" size={24} />
             <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Takeaway</p>
             <p className="text-3xl font-black mt-1">{takeawayCount}</p>
           </div>
-          <div className="glass-card rounded-[2rem] p-5">
+          <div className="glass-card rounded-[2rem] p-5 hover-lift">
             <CheckCircle2 className="text-green-600 mb-4" size={24} />
             <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Open Value</p>
             <p className="text-3xl font-black mt-1">Nu. {activeTotal.toFixed(0)}</p>
@@ -253,7 +253,7 @@ export default function AdminDashboard() {
               return (
                 <article
                   key={group.key}
-                  className="glass-card rounded-[2rem] overflow-hidden"
+                  className="glass-card rounded-[2rem] overflow-hidden hover-lift"
                 >
                   <div className="p-5 border-b border-gray-100 flex items-start justify-between gap-4">
                     <div className="flex items-center gap-4">

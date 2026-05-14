@@ -85,7 +85,7 @@ export default function Analytics() {
 
       {/* SUMMARY CARDS */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mb-8">
-        <div className="glass-card p-6 rounded-[2rem]">
+        <div className="glass-card p-6 rounded-[2rem] hover-lift">
           <div className="flex justify-between items-start mb-4">
             <div className="p-3 bg-green-50 text-green-600 rounded-2xl"><DollarSign size={22} /></div>
             <span className="text-[10px] font-black text-green-600 bg-green-50 px-2 py-1 rounded-full flex items-center gap-1"><ArrowUpRight size={12}/> Income</span>
@@ -95,7 +95,7 @@ export default function Analytics() {
           <p className="text-[10px] text-gray-300 font-bold mt-1">Orders: Nu. {orderRevenue.toLocaleString()} + Other: Nu. {totalOtherIncome.toLocaleString()}</p>
         </div>
 
-        <div className="glass-card p-6 rounded-[2rem]">
+        <div className="glass-card p-6 rounded-[2rem] hover-lift">
           <div className="flex justify-between items-start mb-4">
             <div className="p-3 bg-red-50 text-red-500 rounded-2xl"><TrendingDown size={22} /></div>
             <span className="text-[10px] font-black text-red-500 bg-red-50 px-2 py-1 rounded-full flex items-center gap-1"><ArrowDownRight size={12}/> Cost</span>
@@ -104,7 +104,7 @@ export default function Analytics() {
           <h2 className="text-2xl font-black mt-1 text-gray-900">Nu. {totalExpenditure.toLocaleString()}</h2>
         </div>
 
-        <div className={`p-6 rounded-[2rem] col-span-1 md:col-span-2 glass-card ${isProfitable ? 'border-l-4 border-l-green-400' : 'border-l-4 border-l-red-400'}`}>
+        <div className={`p-6 rounded-[2rem] col-span-1 md:col-span-2 glass-card hover-lift ${isProfitable ? 'border-l-4 border-l-green-400' : 'border-l-4 border-l-red-400'}`}>
           <div className="flex justify-between items-start mb-4">
             <div className={`p-3 rounded-2xl ${isProfitable ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-600'}`}>
               {isProfitable ? <ArrowUpRight size={22} /> : <ArrowDownRight size={22} />}

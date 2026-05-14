@@ -106,3 +106,26 @@ body {
   body { background: white !important; }
   .print-area { background: white !important; }
 }
+
+/* Hover lift effect */
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+}
+.hover-lift:active {
+  transform: scale(0.97);
+}
+
+/* Button press effect */
+.btn-press {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.btn-press:hover {
+  transform: scale(1.03);
+}
+.btn-press:active {
+  transform: scale(0.95);
+}

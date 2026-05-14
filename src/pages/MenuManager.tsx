@@ -188,7 +188,7 @@ export default function MenuManagement() {
             <h2 className="text-xs font-black uppercase text-gray-300 tracking-widest mb-4">{cat}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {catItems.map((item: any) => (
-                <div key={item.id} className="glass-card rounded-[2rem] overflow-hidden flex items-center gap-4 p-4">
+                <div key={item.id} className="glass-card rounded-[2rem] overflow-hidden flex items-center gap-4 p-4 hover-lift">
                   <div className="w-16 h-16 rounded-2xl bg-gray-50 overflow-hidden shrink-0">
                     {item.image_url
                       ? <img src={item.image_url} className="w-full h-full object-cover" alt={item.name} />

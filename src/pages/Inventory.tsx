@@ -489,7 +489,7 @@ export default function CustomerMenu() {
                   return (
                     <div
                       key={item.id}
-                      className="flex items-center gap-4 glass-card rounded-[2rem] hover:shadow-md transition-shadow"
+                      className="flex items-center gap-4 glass-card rounded-[2rem] hover-lift hover:shadow-md transition-shadow"
                     >
                       <div className="w-20 h-20 rounded-2xl bg-gray-50 overflow-hidden shrink-0">
                         <img

@@ -41,7 +41,7 @@ export default function Home() {
           <div className="grid gap-4">
             <button
               onClick={() => setStep('choose')}
-              className="group flex flex-col items-center justify-center bg-[#D64000] text-white p-10 rounded-[2.5rem] transition-all active:scale-95 shadow-xl shadow-orange-200"
+              className="group flex flex-col items-center justify-center bg-[#D64000] text-white p-10 rounded-[2.5rem] transition-all btn-press shadow-xl shadow-orange-200"
             >
               <ShoppingBag size={44} className="mb-4 group-hover:scale-110 transition-transform" />
               <span className="font-black text-xl uppercase tracking-tight">Order Now</span>
@@ -62,7 +62,7 @@ export default function Home() {
             <p className="text-sm font-black uppercase text-gray-400 tracking-widest mb-6">How would you like to order?</p>
             <button
               onClick={() => handleChoose('dine-in')}
-              className="group w-full flex items-center gap-5 bg-gray-900 text-white p-7 rounded-[2rem] transition-all active:scale-95 shadow-xl"
+              className="group w-full flex items-center gap-5 bg-gray-900 text-white p-7 rounded-[2rem] transition-all btn-press shadow-xl"
             >
               <UtensilsCrossed size={36} className="group-hover:scale-110 transition-transform shrink-0" />
               <div className="text-left">
@@ -73,7 +73,7 @@ export default function Home() {
 
             <button
               onClick={() => handleChoose('takeaway')}
-              className="group w-full flex items-center gap-5 bg-[#D64000] text-white p-7 rounded-[2rem] transition-all active:scale-95 shadow-xl shadow-orange-200"
+              className="group w-full flex items-center gap-5 bg-[#D64000] text-white p-7 rounded-[2rem] transition-all btn-press shadow-xl shadow-orange-200"
             >
               <ShoppingBag size={36} className="group-hover:scale-110 transition-transform shrink-0" />
               <div className="text-left">
@@ -108,7 +108,7 @@ export default function Home() {
                   required
                   type="text"
                   value={customerInfo.name}
-                  className="w-full p-4 rounded-2xl bg-white border-none shadow-sm font-bold text-sm outline-none focus:ring-2 focus:ring-orange-100"
+                  className="w-full p-4 rounded-2xl bg-white border-none shadow-sm font-bold text-sm text-gray-900 outline-none focus:ring-2 focus:ring-orange-100"
                   placeholder="Enter your name"
                   onChange={(e) => setCustomerInfo({ ...customerInfo, name: e.target.value })}
                 />
@@ -119,14 +119,14 @@ export default function Home() {
                   required
                   type="tel"
                   value={customerInfo.phone}
-                  className="w-full p-4 rounded-2xl bg-white border-none shadow-sm font-bold text-sm outline-none focus:ring-2 focus:ring-orange-100"
+                  className="w-full p-4 rounded-2xl bg-white border-none shadow-sm font-bold text-sm text-gray-900 outline-none focus:ring-2 focus:ring-orange-100"
                   placeholder="e.g. 17XXXXXX"
                   onChange={(e) => setCustomerInfo({ ...customerInfo, phone: e.target.value })}
                 />
               </div>
               <button
                 type="submit"
-                className="w-full bg-[#D64000] text-white p-4 rounded-2xl font-black shadow-lg mt-2 active:scale-95 transition-all"
+                className="w-full bg-[#D64000] text-white p-4 rounded-2xl font-black shadow-lg mt-2 btn-press transition-all"
               >
                 VIEW MENU
               </button>

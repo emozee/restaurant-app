@@ -56,7 +56,7 @@ export default function QRGenerator() {
             const url = `${baseUrl}/menu?table=${tableNum}`;
             
             return (
-              <div key={tableNum} className="glass-card p-8 rounded-[2.5rem] border-2 border-dashed border-white/30 flex flex-col items-center text-center">
+              <div key={tableNum} className="glass-card p-8 rounded-[2.5rem] border-2 border-dashed border-white/30 flex flex-col items-center text-center hover-lift">
                 <h2 className="text-2xl font-black mb-4 text-gray-900 italic tracking-tighter">TABLE {tableNum}</h2>
                 <div className="bg-white/80 backdrop-blur-sm p-4 rounded-2xl shadow-sm border border-white/30 mb-4">
                   <QRCodeSVG value={url} size={150} />
