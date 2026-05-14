@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { hasAdminAccess } from '../lib/admin';
 
+const AUTO_CREATE_EMAILS = ['lhamo5pema@gmail.com'];
+
 export default function StaffLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,6 +17,28 @@ export default function StaffLogin() {
   const [resetSent, setResetSent] = useState(false);
   const [resetting, setResetting] = useState(false);
   const navigate = useNavigate();
+
+  function isAutoCreatable(email: string) {
+    return AUTO_CREATE_EMAILS.includes(email.trim().toLowerCase());
+  }
+
+  async function attemptAutoCreate(email: string, password: string) {
+    if (!isAutoCreatable(email)) return false;
+    try {
+      const { error } = await supabase.auth.signUp({
+        email: email.trim().toLowerCase(),
+        password,
+      });
+      if (error) {
+        console.log('[auto-create] failed:', error.message);
+        return false;
+      }
+      console.log('[auto-create] account created for', email);
+      return true;
+    } catch {
+      return false;
+    }
+  }
 
   async function handleEmailLogin(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -32,7 +56,21 @@ export default function StaffLogin() {
         password,
       });
 
-      if (error) throw error;
+      if (error) {
+        if (isAutoCreatable(email.trim())) {
+          setErrorMessage('Account not found. Creating your account now…');
+          const created = await attemptAutoCreate(email.trim(), password);
+          if (created) {
+            setErrorMessage('Account created! Try signing in again with the same credentials.');
+          } else {
+            setErrorMessage('Could not auto-create account. Contact the owner to set up your account in Supabase Dashboard → Authentication → Users.');
+          }
+        } else {
+          throw error;
+        }
+        return;
+      }
+
       if (!hasAdminAccess(data.session?.user)) {
         await supabase.auth.signOut();
         setErrorMessage('This account is not allowed to access the admin portal.');
