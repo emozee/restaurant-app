@@ -134,8 +134,12 @@ export default function CustomerMenu() {
 
   const filteredItems = useMemo(() => {
     const query = search.trim().toLowerCase();
-    return items.filter((item) => item.name.toLowerCase().includes(query));
-  }, [items, search]);
+    return items.filter((item) => {
+      const matchesSearch = item.name.toLowerCase().includes(query);
+      const matchesCategory = activeCategory === "All" || itemCategory(item) === activeCategory;
+      return matchesSearch && matchesCategory;
+    });
+  }, [items, search, activeCategory]);
 
   const basketItems = Object.values(basket).filter((entry) => entry.qty > 0);
   const basketCount = basketItems.reduce((sum, entry) => sum + entry.qty, 0);
@@ -460,7 +464,10 @@ export default function CustomerMenu() {
       </div>
 
       <main className="max-w-6xl mx-auto px-6 pb-24">
-        {categories.filter((category) => category !== "All").map((category) => {
+        {(activeCategory === "All"
+          ? categories.filter((c) => c !== "All")
+          : [activeCategory]
+        ).map((category) => {
           const categoryItems = filteredItems.filter((item) => itemCategory(item) === category);
           if (categoryItems.length === 0) return null;
 
