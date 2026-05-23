@@ -27,7 +27,7 @@ export default function Analytics() {
     const itemSales: { [key: string]: number } = {};
     orders?.forEach((order) => {
       totalRevenue += Number(order.total_amount);
-      order.items.forEach((item: any) => {
+      order.items?.forEach((item: any) => {
         itemSales[item.name] = (itemSales[item.name] || 0) + item.quantity;
       });
     });
@@ -79,7 +79,7 @@ export default function Analytics() {
   const isProfitable = netProfit >= 0;
 
   return (
-    <div className="p-6 md:p-8 bg-gradient-to-br from-gray-50 via-gray-50 to-orange-50/30 min-h-screen">
+    <div className="p-6 md:p-8 bg-white min-h-screen">
       <h1 className="text-3xl font-black mb-2 text-gray-900">Financial Overview</h1>
       <p className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-8">Income - Expenditure - Profit/Loss</p>
 
@@ -137,13 +137,13 @@ export default function Analytics() {
           {showIncomeForm && (
             <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-4 mb-4 space-y-3 border border-white/20">
               <input
-                className="w-full p-3 rounded-xl bg-white/80 backdrop-blur-sm text-sm font-bold outline-none border border-white/30"
+                className="w-full p-3 rounded-xl bg-white/80 backdrop-blur-sm text-sm font-bold text-gray-900 outline-none border border-white/30"
                 placeholder="Source (e.g. Catering)"
                 value={newIncome.label}
                 onChange={(e) => setNewIncome({ ...newIncome, label: e.target.value })}
               />
               <input
-                className="w-full p-3 rounded-xl bg-white/80 backdrop-blur-sm text-sm font-bold outline-none border border-white/30"
+                className="w-full p-3 rounded-xl bg-white/80 backdrop-blur-sm text-sm font-bold text-gray-900 outline-none border border-white/30"
                 placeholder="Amount (Nu.)"
                 type="number"
                 value={newIncome.amount}
@@ -189,13 +189,13 @@ export default function Analytics() {
           {showExpForm && (
             <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-4 mb-4 space-y-3 border border-white/20">
               <input
-                className="w-full p-3 rounded-xl bg-white/80 backdrop-blur-sm text-sm font-bold outline-none border border-white/30"
+                className="w-full p-3 rounded-xl bg-white/80 backdrop-blur-sm text-sm font-bold text-gray-900 outline-none border border-white/30"
                 placeholder="Expense (e.g. Vegetables)"
                 value={newExp.label}
                 onChange={(e) => setNewExp({ ...newExp, label: e.target.value })}
               />
               <input
-                className="w-full p-3 rounded-xl bg-white/80 backdrop-blur-sm text-sm font-bold outline-none border border-white/30"
+                className="w-full p-3 rounded-xl bg-white/80 backdrop-blur-sm text-sm font-bold text-gray-900 outline-none border border-white/30"
                 placeholder="Amount (Nu.)"
                 type="number"
                 value={newExp.amount}

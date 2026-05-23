@@ -49,12 +49,11 @@ export function hasAdminAccess(user?: User | null) {
   }
 
   const allowedEmails = configuredAdminEmails();
-  if (allowedEmails.length === 0) {
-    console.log('[admin] VITE_ADMIN_EMAILS empty — allowing all');
-    return true;
+  if (allowedEmails.length > 0) {
+    const matched = Boolean(user.email && allowedEmails.includes(user.email.toLowerCase()));
+    console.log('[admin] email whitelist check:', matched, '| allowed:', allowedEmails);
+    if (matched) return true;
   }
 
-  const matched = Boolean(user.email && allowedEmails.includes(user.email.toLowerCase()));
-  console.log('[admin] email whitelist check:', matched, '| allowed:', allowedEmails);
-  return matched;
+  return false;
 }

@@ -20,6 +20,7 @@ import {
   PhoneCall,
 } from "lucide-react";
 import { validatePhone, formatPhoneDisplay, getPhoneDigits } from "../lib/phone";
+import { useToast } from "../components/Toast";
 
 type OrderMode = "dine-in" | "takeaway";
 
@@ -71,13 +72,14 @@ export default function CustomerMenu() {
   );
   const [customerForm, setCustomerForm] = useState<CustomerInfo>(() => ({
     name: customerInfo?.name || "",
-    phone: customerInfo?.phone || "",
+    phone: getPhoneDigits(customerInfo?.phone || ""),
     type: isTableOrder ? "dine-in" : customerInfo?.type || "takeaway",
     tableNumber,
   }));
   const [phoneError, setPhoneError] = useState('');
   const [phoneCarrier, setPhoneCarrier] = useState('');
 
+  const { toast } = useToast();
   const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const activeOrderStorageKey = customerInfo
     ? `active_order_${isTableOrder ? `table_${tableNumber}` : customerInfo.type}_${customerInfo.phone}`
@@ -88,7 +90,7 @@ export default function CustomerMenu() {
     setCustomerInfo(storedCustomer);
     setCustomerForm({
       name: storedCustomer?.name || "",
-      phone: storedCustomer?.phone || "",
+      phone: getPhoneDigits(storedCustomer?.phone || ""),
       type: isTableOrder ? "dine-in" : storedCustomer?.type || "takeaway",
       tableNumber,
     });
@@ -211,7 +213,7 @@ export default function CustomerMenu() {
   const editCustomerDetails = () => {
     setCustomerForm({
       name: customerInfo?.name || "",
-      phone: customerInfo?.phone || "",
+      phone: getPhoneDigits(customerInfo?.phone || ""),
       type: isTableOrder ? "dine-in" : customerInfo?.type || "takeaway",
       tableNumber,
     });
@@ -267,7 +269,7 @@ export default function CustomerMenu() {
       setShowConfirmDialog(true);
     } catch (error) {
       const message = error instanceof Error ? error.message : "Unknown error";
-      alert(`Failed to place order: ${message}`);
+      toast(`Failed to place order: ${message}`, "error");
     } finally {
       setIsSubmitting(false);
     }

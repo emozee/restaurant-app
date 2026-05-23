@@ -5,6 +5,7 @@ import type { Session } from "@supabase/supabase-js";
 import { supabase } from "./lib/supabase";
 import { hasAdminAccess } from "./lib/admin";
 import Sidebar from "./components/Sidebar";
+import { ToastProvider } from "./components/Toast";
 import Home from "./pages/Home";
 import CustomerMenu from "./pages/Inventory";
 import StaffLogin from "./pages/StaffLogin";
@@ -38,6 +39,7 @@ function LoadingScreen() {
 function App() {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -63,47 +65,51 @@ function App() {
     return session && isAdmin ? page : <Navigate to="/" replace />;
   };
 
+  const sidebarWidth = sidebarCollapsed ? "lg:ml-[68px]" : "lg:ml-64";
+
   return (
-    <div className="flex min-h-screen bg-[#0f0f0f]">
-      {showSidebar && <Sidebar/>}
-      <main className={`flex-1 min-w-0 ${showSidebar ? "lg:ml-64" : ""}`}>
-        <Routes>
-          {/* Public */}
-          <Route path="/" element={<Home />} />
-          <Route path="/menu" element={<CustomerMenu />} />
-          <Route
-            path="/admin-login"
-            element={
-              session && isAdmin ? <Navigate to="/live-orders" replace /> : <StaffLogin />
-            }
-          />
+    <ToastProvider>
+      <div className={`flex min-h-screen ${showSidebar ? "bg-white" : "bg-[#0f0f0f]"}`}>
+        {showSidebar && <Sidebar collapsed={sidebarCollapsed} onToggleCollapse={() => setSidebarCollapsed((c) => !c)} />}
+        <main className={`flex-1 min-w-0 transition-all duration-300 ${showSidebar ? sidebarWidth : ""}`}>
+          <Routes>
+            {/* Public */}
+            <Route path="/" element={<Home />} />
+            <Route path="/menu" element={<CustomerMenu />} />
+            <Route
+              path="/admin-login"
+              element={
+                session && isAdmin ? <Navigate to="/live-orders" replace /> : <StaffLogin />
+              }
+            />
 
-          {/* Admin-protected */}
-          <Route
-            path="/live-orders"
-            element={requireAdmin(<AdminDashboard />)}
-          />
-          <Route
-            path="/order-history"
-            element={requireAdmin(<OrdersHistory />)}
-          />
-          <Route
-            path="/analytics"
-            element={requireAdmin(<Analytics />)}
-          />
-          <Route
-            path="/menu-items"
-            element={requireAdmin(<MenuManager />)}
-          />
-          <Route
-            path="/qr-generator"
-            element={requireAdmin(<QRGenerator />)}
-          />
+            {/* Admin-protected */}
+            <Route
+              path="/live-orders"
+              element={requireAdmin(<AdminDashboard />)}
+            />
+            <Route
+              path="/order-history"
+              element={requireAdmin(<OrdersHistory />)}
+            />
+            <Route
+              path="/analytics"
+              element={requireAdmin(<Analytics />)}
+            />
+            <Route
+              path="/menu-items"
+              element={requireAdmin(<MenuManager />)}
+            />
+            <Route
+              path="/qr-generator"
+              element={requireAdmin(<QRGenerator />)}
+            />
 
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </main>
-    </div>
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </main>
+      </div>
+    </ToastProvider>
   );
 }
 

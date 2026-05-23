@@ -13,6 +13,7 @@ import {
   User,
   UtensilsCrossed,
 } from "lucide-react";
+import { useToast } from "../components/Toast";
 
 type Order = {
   id: string;
@@ -41,8 +42,8 @@ type OrderGroup = {
 
 const STATUS_STYLES: Record<string, string> = {
   pending: "bg-yellow-50 text-yellow-700",
-  confirmed: "bg-blue-50 text-blue-700",
-  cooking: "bg-orange-50 text-orange-700",
+  confirmed: "bg-orange-50 text-orange-700",
+  cooking: "bg-[#FFF0E8] text-[#D64000]",
   completed: "bg-green-50 text-green-700",
 };
 
@@ -118,6 +119,7 @@ function buildGroups(orders: Order[]): OrderGroup[] {
 }
 
 export default function AdminDashboard() {
+  const { toast } = useToast();
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
   const [updatingGroup, setUpdatingGroup] = useState<string | null>(null);
@@ -171,13 +173,14 @@ export default function AdminDashboard() {
       .in("id", ids);
 
     if (error) {
-      alert(`Could not update orders: ${error.message}`);
+      toast(`Could not update orders: ${error.message}`, "error");
     } else {
       setOrders((current) =>
         status === "completed"
           ? current.filter((order) => !ids.includes(order.id))
           : current.map((order) => (ids.includes(order.id) ? { ...order, status } : order)),
       );
+      toast(`Orders moved to "${status}"`, "success");
     }
 
     setUpdatingGroup(null);
@@ -192,45 +195,51 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-50 to-orange-50/30 p-4 md:p-8 text-gray-900 animate-fade-in">
+    <div className="min-h-screen bg-white p-4 md:p-8 text-gray-900 animate-fade-in">
       <div className="fixed inset-0 bg-[url('/logo.jpg')] bg-cover bg-center opacity-[0.02] pointer-events-none" />
       <div className="max-w-7xl mx-auto">
         <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
-          <div>
-            <p className="text-[10px] font-black text-[#D64000] uppercase tracking-widest mb-2">
-              Admin Dashboard
-            </p>
-            <h1 className="text-3xl md:text-4xl font-black italic tracking-tighter">
-              Live Orders
-            </h1>
+          <div className="flex items-center gap-4">
+            <div className="w-14 h-14 rounded-2xl overflow-hidden shadow-lg ring-2 ring-[#D64000]/10 shrink-0">
+              <img src="/logo.jpg" alt="ཨོ་ལོ" className="w-full h-full object-cover" />
+            </div>
+            <div>
+              <div className="font-black italic tracking-tighter leading-none">
+                <span className="text-[#D64000] text-2xl">ཨོ་ལོ</span>{' '}
+                <span className="text-[#FFB800] text-2xl">PIZZA</span>
+              </div>
+              <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mt-0.5">
+                Admin Dashboard — Live Orders
+              </p>
+            </div>
           </div>
           <button
             type="button"
             onClick={fetchOrders}
-            className="flex items-center justify-center gap-2 glass-card text-gray-500 px-5 py-3 rounded-2xl font-black text-xs uppercase hover:text-gray-900 transition"
+            className="flex items-center justify-center gap-2 bg-[#D64000] text-white px-5 py-3 rounded-2xl font-black text-xs uppercase hover:brightness-110 transition active:scale-95 shadow-lg"
           >
             <RefreshCw size={16} /> Refresh
           </button>
         </header>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <div className="glass-card rounded-[2rem] p-5 hover-lift">
+          <div className="glass-card rounded-[2rem] p-5 hover-lift border-l-4 border-l-[#D64000]">
             <ReceiptText className="text-[#D64000] mb-4" size={24} />
             <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Active Orders</p>
             <p className="text-3xl font-black mt-1">{orders.length}</p>
           </div>
-          <div className="glass-card rounded-[2rem] p-5 hover-lift">
-            <Table2 className="text-gray-900 mb-4" size={24} />
+          <div className="glass-card rounded-[2rem] p-5 hover-lift border-l-4 border-l-[#FFB800]">
+            <Table2 className="text-[#FFB800] mb-4" size={24} />
             <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Table Groups</p>
             <p className="text-3xl font-black mt-1">{tableGroupCount}</p>
           </div>
-          <div className="glass-card rounded-[2rem] p-5 hover-lift">
-            <ShoppingBag className="text-blue-600 mb-4" size={24} />
+          <div className="glass-card rounded-[2rem] p-5 hover-lift border-l-4 border-l-[#D64000]">
+            <ShoppingBag className="text-[#D64000] mb-4" size={24} />
             <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Takeaway</p>
             <p className="text-3xl font-black mt-1">{takeawayCount}</p>
           </div>
-          <div className="glass-card rounded-[2rem] p-5 hover-lift">
-            <CheckCircle2 className="text-green-600 mb-4" size={24} />
+          <div className="glass-card rounded-[2rem] p-5 hover-lift border-l-4 border-l-[#FFB800]">
+            <CheckCircle2 className="text-[#FFB800] mb-4" size={24} />
             <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Open Value</p>
             <p className="text-3xl font-black mt-1">Nu. {activeTotal.toFixed(0)}</p>
           </div>
@@ -260,10 +269,10 @@ export default function AdminDashboard() {
                     <div className="flex items-center gap-4">
                       <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${
                         group.kind === "table"
-                          ? "bg-gray-900 text-white"
+                          ? "bg-[#D64000] text-white"
                           : group.kind === "dine-in"
                             ? "bg-[#FFF0E8] text-[#D64000]"
-                            : "bg-blue-50 text-blue-600"
+                            : "bg-[#FFF8E8] text-[#FFB800]"
                       }`}>
                         {group.kind === "table" && <Table2 size={22} />}
                         {group.kind === "dine-in" && <UtensilsCrossed size={22} />}
@@ -337,7 +346,7 @@ export default function AdminDashboard() {
                         type="button"
                         onClick={() => updateGroupStatus(group, "confirmed")}
                         disabled={updatingGroup === group.key}
-                        className="px-4 py-3 rounded-2xl bg-blue-50 text-blue-700 font-black text-xs uppercase disabled:opacity-50 hover:bg-blue-100 hover:scale-105 hover:shadow-lg transition-all active:scale-95"
+                        className="px-4 py-3 rounded-2xl bg-[#FFF0E8] text-[#D64000] font-black text-xs uppercase disabled:opacity-50 hover:bg-[#FFE0D0] hover:scale-105 hover:shadow-lg transition-all active:scale-95"
                       >
                         Confirm
                       </button>
@@ -345,7 +354,7 @@ export default function AdminDashboard() {
                         type="button"
                         onClick={() => updateGroupStatus(group, "cooking")}
                         disabled={updatingGroup === group.key}
-                        className="px-4 py-3 rounded-2xl bg-orange-50 text-orange-700 font-black text-xs uppercase disabled:opacity-50 flex items-center justify-center gap-2 hover:bg-orange-100 hover:scale-105 hover:shadow-lg transition-all active:scale-95"
+                        className="px-4 py-3 rounded-2xl bg-[#FFF8E8] text-[#FFB800] font-black text-xs uppercase disabled:opacity-50 flex items-center justify-center gap-2 hover:bg-[#FFE8C0] hover:scale-105 hover:shadow-lg transition-all active:scale-95"
                       >
                         <ChefHat size={15} /> Cooking
                       </button>
@@ -353,7 +362,7 @@ export default function AdminDashboard() {
                         type="button"
                         onClick={() => updateGroupStatus(group, "completed")}
                         disabled={updatingGroup === group.key}
-                        className="px-4 py-3 rounded-2xl bg-green-600 text-white font-black text-xs uppercase disabled:opacity-50 hover:bg-green-500 hover:scale-105 hover:shadow-lg transition-all active:scale-95"
+                        className="px-4 py-3 rounded-2xl bg-[#D64000] text-white font-black text-xs uppercase disabled:opacity-50 hover:bg-[#B83800] hover:scale-105 hover:shadow-lg transition-all active:scale-95"
                       >
                         Complete
                       </button>

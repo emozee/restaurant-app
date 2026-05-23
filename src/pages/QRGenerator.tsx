@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
 import { Printer, ArrowLeft, Download } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -6,15 +6,16 @@ import { Link } from 'react-router-dom';
 export default function QRGenerator() {
   const [tableCount, setTableCount] = useState(5);
   const [baseUrl, setBaseUrl] = useState(window.location.origin);
-  const svgRefs = useRef<Record<number, SVGSVGElement | null>>({});
 
   const downloadQR = (tableNum: number) => {
-    const svg = svgRefs.current[tableNum];
+    const wrapper = document.getElementById(`qr-${tableNum}`);
+    if (!wrapper) return;
+    const svg = wrapper.querySelector('svg');
     if (!svg) return;
     const clone = svg.cloneNode(true) as SVGSVGElement;
-    const wrapper = document.createElement('div');
-    wrapper.appendChild(clone);
-    const svgData = new XMLSerializer().serializeToString(wrapper.firstElementChild!);
+    const tempDiv = document.createElement('div');
+    tempDiv.appendChild(clone);
+    const svgData = new XMLSerializer().serializeToString(tempDiv.firstElementChild!);
     const blob = new Blob([svgData], { type: 'image/svg+xml' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -27,7 +28,7 @@ export default function QRGenerator() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-50 to-orange-50/30 p-8">
+    <div className="min-h-screen bg-white p-8">
       <div className="max-w-4xl mx-auto">
         <header className="flex justify-between items-center mb-8 no-print">
           {/* Points back to the main admin dashboard */}
@@ -52,7 +53,7 @@ export default function QRGenerator() {
                 min={1}
                 value={tableCount} 
                 onChange={(e) => setTableCount(Math.max(1, Number(e.target.value)))}
-                className="w-full p-4 bg-gray-50 rounded-2xl border-none focus:ring-2 focus:ring-orange-200 font-bold outline-none"
+                className="w-full p-4 bg-gray-50 rounded-2xl border-none focus:ring-2 focus:ring-orange-200 font-bold text-gray-900 outline-none"
               />
             </div>
             <div>
@@ -61,7 +62,7 @@ export default function QRGenerator() {
                 type="text" 
                 value={baseUrl} 
                 onChange={(e) => setBaseUrl(e.target.value)}
-                className="w-full p-4 bg-gray-50 rounded-2xl border-none focus:ring-2 focus:ring-orange-200 font-bold outline-none"
+                className="w-full p-4 bg-gray-50 rounded-2xl border-none focus:ring-2 focus:ring-orange-200 font-bold text-gray-900 outline-none"
               />
             </div>
           </div>
@@ -77,11 +78,10 @@ export default function QRGenerator() {
             return (
               <div key={tableNum} className="glass-card p-8 rounded-[2.5rem] border-2 border-dashed border-white/30 flex flex-col items-center text-center hover-lift">
                 <h2 className="text-2xl font-black mb-4 text-gray-900 italic tracking-tighter">TABLE {tableNum}</h2>
-                <div className="bg-white/80 backdrop-blur-sm p-4 rounded-2xl shadow-sm border border-white/30 mb-4">
+                <div id={`qr-${tableNum}`} className="bg-white/80 backdrop-blur-sm p-4 rounded-2xl shadow-sm border border-white/30 mb-4">
                   <QRCodeSVG
                     value={url}
                     size={150}
-                    ref={(el) => { svgRefs.current[tableNum] = el; }}
                   />
                 </div>
                 <p className="text-[10px] font-black text-[#D64000] uppercase tracking-[0.2em]">Scan to Order</p>

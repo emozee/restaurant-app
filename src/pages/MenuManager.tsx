@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
 import { Loader2, Plus, Pencil, Trash2, X, Upload, ImageIcon } from "lucide-react";
+import { useToast } from "../components/Toast";
 
 export default function MenuManagement() {
+  const { toast } = useToast();
   const [items, setItems] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [editItem, setEditItem] = useState<any>(null);
@@ -45,14 +47,14 @@ export default function MenuManagement() {
       const { data: urlData } = supabase.storage.from("menu-images").getPublicUrl(fileName);
       setForm((f) => ({ ...f, image_url: urlData.publicUrl }));
     } catch (err: any) {
-      alert("Upload failed: " + err.message);
+      toast("Upload failed: " + err.message, "error");
     } finally {
       setUploading(false);
     }
   };
 
   const handleSave = async () => {
-    if (!form.name || !form.price) return alert("Name and price are required");
+    if (!form.name || !form.price) { toast("Name and price are required", "error"); return; }
     setSaving(true);
     try {
       const payload = { name: form.name, price: parseFloat(form.price), category: form.category, image_url: form.image_url };
@@ -66,8 +68,9 @@ export default function MenuManagement() {
         setShowAddForm(false);
       }
       setForm(blankForm);
+      toast(editItem ? "Item updated successfully" : "Item added to menu", "success");
     } catch (err: any) {
-      alert("Save failed: " + err.message);
+      toast("Save failed: " + err.message, "error");
     } finally {
       setSaving(false);
     }
@@ -95,7 +98,7 @@ export default function MenuManagement() {
   }, {});
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-50 to-orange-50/30 p-6 md:p-8">
+    <div className="min-h-screen bg-white p-6 md:p-8">
       <div className="max-w-5xl mx-auto">
         <div className="flex justify-between items-center mb-8">
           <div>
@@ -124,7 +127,7 @@ export default function MenuManagement() {
               <div>
                 <label className="text-[10px] font-black uppercase text-gray-400 block mb-1 ml-1">Item Name *</label>
                 <input
-                  className="w-full p-3 bg-white/80 backdrop-blur-sm rounded-2xl text-sm font-bold outline-none focus:ring-2 focus:ring-orange-100"
+                  className="w-full p-3 bg-white/80 backdrop-blur-sm rounded-2xl text-sm font-bold text-gray-900 outline-none focus:ring-2 focus:ring-orange-100"
                   placeholder="e.g. Butter Chicken"
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -133,7 +136,7 @@ export default function MenuManagement() {
               <div>
                 <label className="text-[10px] font-black uppercase text-gray-400 block mb-1 ml-1">Price (Nu.) *</label>
                 <input
-                  className="w-full p-3 bg-white/80 backdrop-blur-sm rounded-2xl text-sm font-bold outline-none focus:ring-2 focus:ring-orange-100"
+                  className="w-full p-3 bg-white/80 backdrop-blur-sm rounded-2xl text-sm font-bold text-gray-900 outline-none focus:ring-2 focus:ring-orange-100"
                   placeholder="e.g. 150"
                   type="number"
                   value={form.price}
@@ -143,7 +146,7 @@ export default function MenuManagement() {
               <div>
                 <label className="text-[10px] font-black uppercase text-gray-400 block mb-1 ml-1">Category</label>
                 <input
-                  className="w-full p-3 bg-white/80 backdrop-blur-sm rounded-2xl text-sm font-bold outline-none focus:ring-2 focus:ring-orange-100"
+                  className="w-full p-3 bg-white/80 backdrop-blur-sm rounded-2xl text-sm font-bold text-gray-900 outline-none focus:ring-2 focus:ring-orange-100"
                   placeholder="e.g. Main Course"
                   value={form.category}
                   onChange={(e) => setForm({ ...form, category: e.target.value })}

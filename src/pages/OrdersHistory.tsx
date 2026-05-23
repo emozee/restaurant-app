@@ -32,7 +32,7 @@ export default function OrdersHistory() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-50 to-orange-50/30 p-4 md:p-8">
+    <div className="min-h-screen bg-white p-4 md:p-8">
       <div className="fixed inset-0 bg-[url('/logo.jpg')] bg-cover bg-center opacity-[0.02] pointer-events-none" />
       <div className="max-w-6xl mx-auto">
         {/* HEADER with ChevronLeft to solve the warning */}
